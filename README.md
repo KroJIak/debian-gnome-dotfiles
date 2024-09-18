@@ -113,6 +113,9 @@ The following applications are required to install for easy use. I decided not t
 ```Terminal
 sudo snap install btop
 sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch
+
+# Change the default shell to fish
+chsh $USER -s /usr/bin/fish
 ```
 If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei_sound_fix/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
 
