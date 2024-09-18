@@ -86,7 +86,7 @@ Next, select the following options:
 #### Finish the installation
 - Is the system clock set to UTC?: `Yes`
 - Please choose `<Continue>` to reboot: `Continue`
-## Manual installation of applications
+## Manual installation
 ### Removing applications
 I left some applications from gnome, because they are more convenient than their counterparts and have functionality related to gnome itself, but I deleted some of them:
 #### Update packages
@@ -114,6 +114,8 @@ The following applications are required to install for easy use. I decided not t
 sudo snap install btop
 sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl
 ```
+If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei_sound_fix/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
+
 I also recommend using `flameshot` instead of the standard screenshot app:
 ```Terminal
 sudo apt remove gnome-screenshot && sudo apt install -y flameshot
@@ -122,14 +124,14 @@ sudo apt remove gnome-screenshot && sudo apt install -y flameshot
 For my tasks, I use the following minimal application stack. This installation is optional.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y code telegram-desktop
+sudo apt install -y code telegram-desktop qbittorrent
 sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install obsidian --classic
 sudo snap install arduino
 sudo snap install discord
 ```
-AnyDesk **(anydesk.sh)**:
+AnyDesk **([anydesk.sh](scripts/apps/anydesk.sh))**:
 ```Terminal
 #!/bin/bash
 wget -qO  https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
@@ -137,12 +139,12 @@ echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-st
 sudo apt update -y
 sudo apt apt install anydesk -y
 ```
-Docker **(docker.sh)**:
+Docker **([docker.sh](scripts/apps/docker.sh))**:
 ```Terminal
 #!/bin/bash
 # Add Docker's official GPG key:
-sudo apt-get update
-sudo apt-get install ca-certificates curl
+sudo apt update -y
+sudo apt install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -152,11 +154,11 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update
+sudo apt update -y
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-Yandex Music **(yandex_music.sh)**:
+Yandex Music **([yandex_music.sh](scripts/apps/yandex_music.sh))**:
 ```Terminal
 #!/bin/bash
 # Variables
