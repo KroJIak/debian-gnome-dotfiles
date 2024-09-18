@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Main menu
+Exec=/usr/bin/gnome-pie -o 625
+Encoding=UTF-8
+Type=Application
+Icon=gnome-main-menu
+StartupWMClass=gnome-pie-625

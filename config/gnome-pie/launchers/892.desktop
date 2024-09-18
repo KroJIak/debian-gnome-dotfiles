@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Folders
+Exec=/usr/bin/gnome-pie -o 892
+Encoding=UTF-8
+Type=Application
+Icon=folder
+StartupWMClass=gnome-pie-892

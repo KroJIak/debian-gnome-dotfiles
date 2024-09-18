@@ -112,7 +112,7 @@ sudo apt install snapd -y
 The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
 ```Terminal
 sudo snap install btop
-sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl
+sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch
 ```
 If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei_sound_fix/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
 
@@ -124,9 +124,10 @@ sudo apt remove gnome-screenshot && sudo apt install -y flameshot
 For my tasks, I use the following minimal application stack. This installation is optional.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y code telegram-desktop qbittorrent
+sudo apt install -y telegram-desktop qbittorrent
 sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
+sudo snap install code --classic
 sudo snap install obsidian --classic
 sudo snap install arduino
 sudo snap install discord
@@ -134,10 +135,10 @@ sudo snap install discord
 AnyDesk **([anydesk.sh](scripts/apps/anydesk.sh))**:
 ```Terminal
 #!/bin/bash
-wget -qO  https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+wget -qO  https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
 echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
 sudo apt update -y
-sudo apt apt install anydesk -y
+sudo apt install anydesk -y
 ```
 Docker **([docker.sh](scripts/apps/docker.sh))**:
 ```Terminal
@@ -156,7 +157,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update -y
 
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 Yandex Music **([yandex_music.sh](scripts/apps/yandex_music.sh))**:
 ```Terminal
@@ -183,6 +184,8 @@ sudo apt-get install -f
 # Remove the temporary file
 rm $TEMP_DEB
 ```
+### Installing configs and extensions
+
 # Keybinds
 Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
 - **`Super + Enter`** Launch terminal

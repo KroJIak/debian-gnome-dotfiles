@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=IDEs
+Exec=/usr/bin/gnome-pie -o 365
+Encoding=UTF-8
+Type=Application
+Icon=gvim
+StartupWMClass=gnome-pie-365

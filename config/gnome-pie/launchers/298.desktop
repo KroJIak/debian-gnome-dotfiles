@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Apps
+Exec=/usr/bin/gnome-pie -o 298
+Encoding=UTF-8
+Type=Application
+Icon=org.gnome.Software
+StartupWMClass=gnome-pie-298

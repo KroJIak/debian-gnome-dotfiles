@@ -1,0 +1,10 @@
+{
+"extension-id": "screenshot-window-sizer",
+"uuid": "screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com",
+"settings-schema": "org.gnome.shell.extensions.screenshot-window-sizer",
+"gettext-domain": "gnome-shell-extensions",
+"name": "Screenshot Window Sizer",
+"description": "Resize windows for GNOME Software screenshots",
+"shell-version": [ "43" ],
+"url": "https://gitlab.gnome.org/GNOME/gnome-shell-extensions"
+}

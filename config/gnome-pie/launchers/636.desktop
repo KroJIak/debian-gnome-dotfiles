@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Main Menu
+Exec=/usr/bin/gnome-pie -o 636
+Encoding=UTF-8
+Type=Application
+Icon=start-here
+StartupWMClass=gnome-pie-636

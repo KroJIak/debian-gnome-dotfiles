@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Settings
+Exec=/usr/bin/gnome-pie -o 731
+Encoding=UTF-8
+Type=Application
+Icon=org.gnome.Settings
+StartupWMClass=gnome-pie-731
