@@ -37,7 +37,7 @@ Next, select the following options:
 - Country: `other -> Europe -> Russian Federation` (This method is used to select Russian as a secondary language)
 - Default locale: `United States (en_US.UTF-8)`
 - Other locale: `ru_RU.UTF-8`
-- Select deafult locale: `en_US.UTF-8`
+- Select default locale: `en_US.UTF-8`
 #### Detect and mount installation media
 - Activate
 #### Load installer components from installation media
@@ -86,6 +86,101 @@ Next, select the following options:
 #### Finish the installation
 - Is the system clock set to UTC?: `Yes`
 - Please choose `<Continue>` to reboot: `Continue`
+## Manual installation of applications
+### Removing applications
+I left some applications from gnome, because they are more convenient than their counterparts and have functionality related to gnome itself, but I deleted some of them:
+#### Update packages
+```Terminal
+sudo apt update -y && sudo apt upgrade -y
+```
+#### Remove this packages
+```Terminal
+sudo apt remove gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
+```
+#### Remove applications from the dock
+```Terminal
+gsettings set org.gnome.shell favorite-apps "[]"
+```
+### Installing applications
+#### Snap installing
+Before you start installing applications, you need to install snap, for easy installation of other applications.
+```Terminal
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install snapd -y
+```
+#### Required applications
+The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
+```Terminal
+sudo snap install btop
+sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl
+```
+I also recommend using `flameshot` instead of the standard screenshot app:
+```Terminal
+sudo apt remove gnome-screenshot && sudo apt install -y flameshot
+```
+#### Optional applications
+For my tasks, I use the following minimal application stack. This installation is optional.
+```Terminal
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install -y code telegram-desktop
+sudo snap install pycharm-community --classic
+sudo snap install intellij-idea-community --classic
+sudo snap install obsidian --classic
+sudo snap install arduino
+sudo snap install discord
+```
+AnyDesk **(anydesk.sh)**:
+```Terminal
+#!/bin/bash
+wget -qO  https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
+sudo apt update -y
+sudo apt apt install anydesk -y
+```
+Docker **(docker.sh)**:
+```Terminal
+#!/bin/bash
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+Yandex Music **(yandex_music.sh)**:
+```Terminal
+#!/bin/bash
+# Variables
+REPO_URL="https://api.github.com/repos/cucumber-sp/yandex-music-linux/releases/latest"
+TEMP_DEB="/tmp/yandex-music-linux.deb"
+# Install dependencies
+sudo apt-get update
+sudo apt-get install -y curl jq
+# Get the download URL of the latest release, filtering for .deb files that contain "amd64"
+DOWNLOAD_URL=$(curl -s $REPO_URL | jq -r '.assets[] | select(.name | endswith(".deb") and contains("amd64")) | .browser_download_url')
+# Check if the URL is empty
+if [ -z "$DOWNLOAD_URL" ]; then
+    echo "Could not find an amd64 .deb file in the latest release."
+    exit 1
+fi
+# Download the .deb file
+curl -L -o $TEMP_DEB "$DOWNLOAD_URL"
+# Install the package
+sudo dpkg -i $TEMP_DEB
+# Fix missing dependencies if any
+sudo apt-get install -f
+# Remove the temporary file
+rm $TEMP_DEB
+```
 # Keybinds
 Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
 - **`Super + Enter`** Launch terminal
