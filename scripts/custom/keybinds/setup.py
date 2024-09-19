@@ -18,6 +18,7 @@ def addToCustomKeybindingList(path):
                              "custom-keybindings"])
     customKeybindings = eval(customKeybindings.stdout)
     customKeybindings.append(path)
+    customKeybindings = list(set(customKeybindings))
     stringCustomKeybindings = str(customKeybindings).replace('"', "'")
     run(["gsettings", "set",
          "org.gnome.settings-daemon.plugins.media-keys", 
@@ -33,7 +34,6 @@ def addCustomKeybind(path, name, command, bind):
     run(["gsettings", "set",
          f"org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:{path}",
          "command", command])
-    run(["gsettings", "set"])
 
 def editDefaultKeybind(path, name, bind):
     if bind: run(["gsettings", "set", path, name, f"['{bind}']"])
