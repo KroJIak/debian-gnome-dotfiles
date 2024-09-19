@@ -12,9 +12,16 @@ def run(command: str | list):
     response = subprocess.run(com, capture_output=True, text=True)
     return response
 
-def getCustomKeybindsCount():
-    customKeybinds = run('gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings')
-    return len(eval(customKeybinds.stdout))
+def addToCustomKeybindingList(path):
+    customKeybindings = run(["gsettings", "get",
+                             "org.gnome.settings-daemon.plugins.media-keys",
+                             "custom-keybindings"])
+    customKeybindings = eval(customKeybindings.stdout)
+    customKeybindings.append(path)
+    stringCustomKeybindings = str(customKeybindings).replace('"', "'")
+    run(["gsettings", "set",
+         "org.gnome.settings-daemon.plugins.media-keys", 
+         "custom-keybindings", stringCustomKeybindings])
 
 def addCustomKeybind(path, name, command, bind):
     run(["gsettings", "set",
@@ -26,19 +33,20 @@ def addCustomKeybind(path, name, command, bind):
     run(["gsettings", "set",
          f"org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:{path}",
          "command", command])
+    run(["gsettings", "set"])
 
 def editDefaultKeybind(path, name, bind):
     if bind: run(["gsettings", "set", path, name, f"['{bind}']"])
     else: run(["gsettings", "set", path, name, "[]"])
 
 def addCustomCategory(category):
-    customKeybindsCount = getCustomKeybindsCount()
     with open(category['txtfile']) as file:
-        for index, line in enumerate(file.readlines(), start=customKeybindsCount):
+        for index, line in enumerate(file.readlines()):
             if not len(line.strip()): continue
             name, command, bind = line.strip()[1:-1].split('" "')
             path = category['path'] + str(index) + '/'
             addCustomKeybind(path, name, command, bind)
+            addToCustomKeybindingList(path)
 
 def editDefaultCategory(category):
     with open(category['txtfile']) as file:
