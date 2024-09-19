@@ -1,4 +1,4 @@
 #!/bin/bash
 
-rm -r ~/.config
+sudo rm -r ~/.config
 cp ../../config ~/.config 

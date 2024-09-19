@@ -8,7 +8,7 @@ rm -r ~/Templates
 rm -r ~/Videos
 mkdir ~/Media
 
-mv user-dirs.dirs ~/.config/user-dirs.dirs
-mv user-dirs.locale ~/.config/user-dirs.locale
+cp user-dirs.dirs ~/.config/user-dirs.dirs
+cp user-dirs.locale ~/.config/user-dirs.locale
 
 xdg-user-dirs-update
