@@ -97,10 +97,6 @@ sudo apt update -y && sudo apt upgrade -y
 ```Terminal
 sudo apt remove gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
 ```
-#### Remove applications from the dock
-```Terminal
-gsettings set org.gnome.shell favorite-apps "[]"
-```
 ### Installing applications
 #### Snap installing
 Before you start installing applications, you need to install snap, for easy installation of other applications.
@@ -187,8 +183,12 @@ sudo apt-get install -f
 # Remove the temporary file
 rm $TEMP_DEB
 ```
+#### Removing unnecessary packages
+```Terminal
+sudo apt autoremove
+```
 ### Installing configs and extensions
-
+pass
 # Keybinds
 Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
 - **`Super + Enter`** Launch terminal

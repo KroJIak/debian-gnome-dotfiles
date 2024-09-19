@@ -1,0 +1,2 @@
+"Terminal" "gnome-terminal" "<Control><Alt>T"
+"Browser" "firefox" "<Control><Alt>B"

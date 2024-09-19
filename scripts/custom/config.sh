@@ -1,4 +1,4 @@
 #!/bin/bash
 
 sudo rm -r ~/.config
-cp ../../config ~/.config 
+cp -r ../../config ~/.config 
