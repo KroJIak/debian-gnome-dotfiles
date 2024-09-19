@@ -11,4 +11,3 @@
 "settings" "gnome-control-center" "<Super>S"
 "telegram" "telegram-desktop" "<Super>T"
 "yandex music" "yandex-music" "<Super>Y"
-
