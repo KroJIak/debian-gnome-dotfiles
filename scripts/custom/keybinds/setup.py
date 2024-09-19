@@ -1,39 +1,53 @@
 
 import subprocess
+import os
 
-FILE = 'keybinds.txt'
-CUSTOM_PATH = '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom'
+KEYBINDS_CATEGORIES = {'custom': {'path': '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom', 'txtfile': 'custom.txt'},
+                       'wm': {'path': 'org.gnome.desktop.wm.keybindings', 'txtfile': 'wm.txt'},
+                       'shell': {'path': 'org.gnome.shell.keybindings', 'txtfile': 'shell.txt'},
+                       'media-keys': {'path': 'org.gnome.settings-daemon.plugins.media-keys', 'txtfile': 'media-keys.txt'}}
 
 def run(command: str | list):
     com = command if isinstance(command, list) else command.split()
-    response = subprocess.run(com)
+    response = subprocess.run(com, capture_output=True, text=True)
     return response
 
 def getCustomKeybindsCount():
     customKeybinds = run('gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings')
-    return len(customKeybinds)
+    return len(eval(customKeybinds.stdout))
 
 def addCustomKeybind(path, name, command, bind):
-    # Устанавливаем имя для кастомного бинда
     run(["gsettings", "set",
          f"org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:{path}",
          "name", name])
-    # Устанавливаем само сочетание клавиш
     run(["gsettings", "set",
          f"org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:{path}",
          "binding", bind])
-    # Устанавливаем команду, которую должен выполнять биндинг
     run(["gsettings", "set",
          f"org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:{path}",
          "command", command])
 
-def main():
+def editDefaultKeybind(path, name, bind):
+    run(["gsettings", "set", path, name, f"['bind']"])
+
+def addCustomCategory(category):
     customKeybindsCount = getCustomKeybindsCount()
-    with open(FILE) as file:
+    with open(category['txtfile']) as file:
         for index, line in enumerate(file.readlines(), start=customKeybindsCount):
-            name, command, bind = line[1:-1].split('" "')
-            path = CUSTOM_PATH + str(index) + '/'
-            addCustomKeybind(path, name, command)
+            name, command, bind = line[1:-2].split('" "')
+            path = category['path'] + str(index) + '/'
+            addCustomKeybind(path, name, command, bind)
+
+def editDefaultCategory(category):
+    with open(category['txtfile']) as file:
+        for line in file.readlines():
+            name, bind = line[1:-2].split('" "')
+            editDefaultKeybind(category['path'], name, bind)
+
+def main():
+    for name, category in KEYBINDS_CATEGORIES.items():
+        if name == 'custom': addCustomCategory(category)
+        else: editDefaultCategory(category)
 
 if __name__ == '__main__':
     main()
