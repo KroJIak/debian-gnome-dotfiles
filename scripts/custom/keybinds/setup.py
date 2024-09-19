@@ -36,7 +36,7 @@ def addCustomCategory(category):
     with open(category['txtfile']) as file:
         for index, line in enumerate(file.readlines(), start=customKeybindsCount):
             if not len(line.strip()): continue
-            name, command, bind = line[1:-2].split('" "')
+            name, command, bind = line.strip()[1:-1].split('" "')
             path = category['path'] + str(index) + '/'
             addCustomKeybind(path, name, command, bind)
 
@@ -44,8 +44,7 @@ def editDefaultCategory(category):
     with open(category['txtfile']) as file:
         for line in file.readlines():
             if not len(line.strip()): continue
-            name, bind = line[1:-2].split('" "')
-            print([name, bind])
+            name, bind = line.strip()[1:-1].split('" "')
             editDefaultKeybind(category['path'], name, bind)
 
 def main():
