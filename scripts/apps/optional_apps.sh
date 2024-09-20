@@ -6,5 +6,6 @@ sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
-sudo snap install arduino
 sudo snap install discord
+sudo snap install arduino
+sudo usermod -a -G dialout $USER
