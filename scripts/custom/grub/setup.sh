@@ -7,6 +7,7 @@ sudo update-grub
 sudo apt install -y plymouth
 
 # after downloading or cloning themes, copy the selected theme in plymouth theme dir
+sudo rm -r /usr/share/plymouth/themes/cubes
 sudo cp -r ../../../grub-theme /usr/share/plymouth/themes/cubes
 
 # install the new theme (angular, in this case)
