@@ -33,3 +33,15 @@ gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
 gsettings set org.gnome.desktop.wm.preferences button-layout :
 # enable scrolling in firefox by touchscreen
 echo "MOZ_USE_XINPUT2 DEFAULT=1" | sudo tee -a /etc/security/pam_env.conf
+# max volume
+gsettings set org.gnome.desktop.sound allow-volume-above-100-percent true
+# Middle Click Paste
+gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
+# пкм на touchpad
+gsettings set org.gnome.desktop.peripherals.touchpad click-method 'areas'
+# clock weekday
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+# clock seconds
+gsettings set org.gnome.desktop.interface clock-show-seconds true
+# center new windows
+gsettings set org.gnome.mutter center-new-windows true
