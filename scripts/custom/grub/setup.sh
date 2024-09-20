@@ -16,5 +16,5 @@ sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth d
 sudo update-alternatives --config default.plymouth
 #(select the number for installed theme, angular in this case)
 
-# update initramfs
+# update initramfs 
 sudo update-initramfs -u
