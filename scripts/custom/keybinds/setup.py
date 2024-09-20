@@ -16,7 +16,7 @@ def addToCustomKeybindingList(path):
     customKeybindings = run(["gsettings", "get",
                              "org.gnome.settings-daemon.plugins.media-keys",
                              "custom-keybindings"])
-    customKeybindings = eval(customKeybindings.stdout)
+    customKeybindings = eval(customKeybindings.stdout) if customKeybindings.stdout.strip() != '@as []' else []
     customKeybindings.append(path)
     customKeybindings = list(set(customKeybindings))
     stringCustomKeybindings = str(customKeybindings).replace('"', "'")

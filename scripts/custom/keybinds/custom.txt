@@ -5,7 +5,7 @@
 "discord" "discord" "<Super>D"
 "flameshot" "flameshot gui" "Print"
 "flameshot config" "flameshot config" "<Shift>Print"
-"kitty" "kitty" "<Super>Enter"
+"kitty" "kitty" "<Super>Return"
 "nautilus" "nautilus" "<Super>E"
 "obsidian" "obsidian" "<Super>O"
 "settings" "gnome-control-center" "<Super>S"
