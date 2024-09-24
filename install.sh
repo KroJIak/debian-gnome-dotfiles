@@ -43,8 +43,8 @@ echo "[Stage 3] Custom scripts | Set grub theme"
 cd grub
 bash setup.sh
 cd ..
-echo "[Stage 3] Custom scripts | Set theme"
-bash theme.sh
+echo "[Stage 3] Custom scripts | Set themes"
+bash themes.sh
 echo "[Stage 3] Custom scripts | Done"
 cd ..
-echo "Done. Please, reboot the system."
+echo "Done. Please, reboot the system and don't forget to enable extensions (scripts/enable_extensions.sh)."

@@ -211,7 +211,7 @@ mkdir ~/.local/share/gnome-shell/extensions
 cp -r ../../extensions/backup/* ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/shell/extensions/ < ../../extensions/settings_backup.txt
 ```
-To enable them, run the following commands:
+To enable them, run the following commands after restarting:
 ```
 gnome-extensions enable just-perfection-desktop@just-perfection
 gnome-extensions enable mediacontrols@cliffniff.github.com
@@ -232,10 +232,22 @@ gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 To make the system look beautiful, I use [theme for the appearance](https://github.com/vinceliuice/Orchis-theme) of the desktop and a [theme for loading grub](https://github.com/adi1090x/plymouth-themes), disabling all logs and dialog boxes.
 #### Orchis theme (desktop)
 ```Terminal
-bash ../../orchis-theme/install.sh --theme green --color dark --size standard
-
+git clone https://github.com/vinceliuice/Orchis-theme
+cd Orchis-theme
+bash install.sh --theme green --color dark --size standard
 gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Green-Dark'
 gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
+cd ..
+sudo rm -r Orchis-theme
+
+sudo apt install -y libglib2.0-dev dconf-cli
+git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
+cd gdm-tools
+sudo bash install.sh
+set-gdm-theme backup update
+set-gdm-theme set -b ~/.gdm_background2K.png
+cd ..
+sudo rm -r gdm-tools
 ```
 #### Plymouth theme (grub)
 ```Terminal

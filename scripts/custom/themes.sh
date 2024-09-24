@@ -8,6 +8,7 @@ gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
 cd ..
 sudo rm -r Orchis-theme
 
+sudo apt install -y libglib2.0-dev dconf-cli
 git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
 cd gdm-tools
 sudo bash install.sh
