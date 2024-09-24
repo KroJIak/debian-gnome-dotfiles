@@ -86,6 +86,10 @@ Next, select the following options:
 #### Finish the installation
 - Is the system clock set to UTC?: `Yes`
 - Please choose `<Continue>` to reboot: `Continue`
+## Automatic installation
+in order not to manually install all the components, a script ([install.sh](install.sh)) was built to install each of the stages automatically. Also, don't forget to look at the #Extra Steps tab
+
+If you do not want to install something from below, the installation of each component is scheduled in stages.
 ## Manual installation
 ### Removing applications
 I left some applications from gnome, because they are more convenient than their counterparts and have functionality related to gnome itself, but I deleted some of them:
@@ -93,18 +97,19 @@ I left some applications from gnome, because they are more convenient than their
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
 ```
-#### Remove this packages
+#### Remove this packages **([remove_trash.sh](scripts/apps/remove_trash.sh))**
 ```Terminal
-sudo apt remove gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
+#!/bin/bash
+sudo apt remove -y gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
 ```
 ### Installing applications
-#### Snap installing
+#### Snap installing **([snap.sh](scripts/apps/snap.sh))**
 Before you start installing applications, you need to install snap, for easy installation of other applications.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install snapd -y
 ```
-#### Required applications
+#### Required applications **([required_apps.sh](scripts/apps/required_apps.sh))**
 The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
 ```Terminal
 sudo snap install btop
@@ -119,7 +124,7 @@ I also recommend using `flameshot` instead of the standard screenshot app:
 ```Terminal
 sudo apt remove gnome-screenshot && sudo apt install -y flameshot
 ```
-#### Optional applications
+#### Optional applications **([optional_apps.sh](scripts/apps/optional_apps.sh))**
 For my tasks, I use the following minimal application stack. This installation is optional.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
@@ -128,20 +133,19 @@ sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
-sudo snap install arduino
 sudo snap install discord
+sudo snap install arduino
+sudo usermod -a -G dialout $USER
 ```
 AnyDesk **([anydesk.sh](scripts/apps/anydesk.sh))**:
 ```Terminal
-#!/bin/bash
-wget -qO  https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
-echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
+wget -qO https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
+sudo echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
 sudo apt update -y
 sudo apt install anydesk -y
 ```
 Docker **([docker.sh](scripts/apps/docker.sh))**:
 ```Terminal
-#!/bin/bash
 # Add Docker's official GPG key:
 sudo apt update -y
 sudo apt install -y ca-certificates curl
@@ -160,7 +164,6 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 ```
 Yandex Music **([yandex_music.sh](scripts/apps/yandex_music.sh))**:
 ```Terminal
-#!/bin/bash
 # Variables
 REPO_URL="https://api.github.com/repos/cucumber-sp/yandex-music-linux/releases/latest"
 TEMP_DEB="/tmp/yandex-music-linux.deb"
@@ -185,10 +188,80 @@ rm $TEMP_DEB
 ```
 #### Removing unnecessary packages
 ```Terminal
-sudo apt autoremove
+sudo apt autoremove -y
 ```
 ### Installing configs and extensions
-pass
+In addition to the applications themselves, you need to install wallpapers, configs of these applications, settings and extensions with their configs.
+#### Adding images **([add_images.sh](scripts/custom/add_images.sh))**
+```Terminal
+sudo rm ~/.face
+sudo rm ~/.face.icon
+
+cp ../../home/background2K.png ~/.background2K.png
+cp ../../home/gdm_background2K.png ~/.gdm_background2K.png
+```
+#### Adding configs **([config.sh](scripts/custom/config.sh))**
+```Terminal
+sudo rm -r ~/.config
+cp -r ../../config ~/.config 
+```
+#### Adding extensions **([set_extensions.sh](scripts/custom/set_extensions.sh))**
+```Terminal
+mkdir ~/.local/share/gnome-shell/extensions
+cp -r ../../extensions/backup/* ~/.local/share/gnome-shell/extensions/
+dconf load /org/gnome/shell/extensions/ < ../../extensions/settings_backup.txt
+```
+To enable them, run the following commands:
+```
+gnome-extensions enable just-perfection-desktop@just-perfection
+gnome-extensions enable mediacontrols@cliffniff.github.com
+gnome-extensions enable logomenu@aryan_k
+gnome-extensions enable tiling-assistant@leleat-on-github
+gnome-extensions enable quicksettings-audio-devices-hider@marcinjahn.com
+gnome-extensions enable Vitals@CoreCoding.com
+gnome-extensions enable quick-settings-avatar@d-go
+gnome-extensions enable top-bar-organizer@julian.gse.jsts.xyz
+gnome-extensions enable quick-settings-tweaks@qwreey
+gnome-extensions enable Bluetooth-Battery-Meter@maniacx.github.com
+gnome-extensions enable blur-my-shell@aunetx
+gnome-extensions enable trayIconsReloaded@selfmade.pl
+gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
+gnome-extensions enable  user-theme@gnome-shell-extensions.gcampax.github.com
+```
+### Setting themes
+To make the system look beautiful, I use [theme for the appearance](https://github.com/vinceliuice/Orchis-theme) of the desktop and a [theme for loading grub](https://github.com/adi1090x/plymouth-themes), disabling all logs and dialog boxes.
+#### Orchis theme (desktop)
+```Terminal
+bash ../../orchis-theme/install.sh --theme green --color dark --size standard
+
+gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Green-Dark'
+gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
+```
+#### Plymouth theme (grub)
+```Terminal
+sudo rm /etc/default/grub
+sudo cp grub /etc/default/
+sudo update-grub
+
+# make sure you have the packages for plymouth
+sudo apt install -y plymouth
+
+# after downloading or cloning themes, copy the selected theme in plymouth theme dir
+sudo rm -r /usr/share/plymouth/themes/cubes
+sudo cp -r ../../../grub-theme /usr/share/plymouth/themes/cubes
+
+# install the new theme (angular, in this case)
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/cubes/cubes.plymouth 100
+
+# select the theme to apply
+sudo plymouth-set-default-theme cubes
+# update initramfs 
+sudo update-initramfs -u
+```
+## Extra Steps
+- Be careful with the automatic installation. The scripts are not perfect and maybe some will not work for you, as they may only fit my system or account. I advise you to figure out each step of the installation yourself
+- After any of the installations, do not forget to change the graphics platform from wayland to Xorg, otherwise at least the gnome pie menu will not work: ![alt text](assets/switch-wayland-to-x11.gif)
+- I noticed that some applications cannot save the result if the window is closed not through the X (cross) button, but simply by closing (for example, when old keys are rebinded. To return the window close button, enter the command: `gsettings set org.gnome.desktop.wm.preferences button-layout :close`
 # Keybinds
 Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
 - **`Super + Enter`** Launch terminal
