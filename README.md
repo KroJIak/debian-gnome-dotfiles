@@ -212,7 +212,7 @@ mkdir ~/.local/share/gnome-shell/extensions
 cp -r ../../extensions/backup/* ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/shell/extensions/ < ../../extensions/settings_backup.txt
 ```
-To enable them, run the following commands after restarting:
+To enable them, run the following commands after restarting **([enable_extensions.sh](scripts/custom/enable_extensions.sh))**:
 ```
 gnome-extensions enable just-perfection-desktop@just-perfection
 gnome-extensions enable mediacontrols@cliffniff.github.com
