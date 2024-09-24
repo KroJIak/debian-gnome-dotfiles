@@ -1,0 +1,236 @@
+[Bluetooth-Battery-Meter]
+swap-icon-text=false
+
+[Logo-menu]
+hide-forcequit=true
+hide-softwarecentre=true
+menu-button-icon-image=2
+menu-button-icon-size=22
+menu-button-system-monitor='kitty --start-as fullscreen -e btop'
+menu-button-terminal='kitty'
+show-lockscreen=false
+show-power-options=false
+
+[auto-move-windows]
+application-list=@as []
+
+[blur-my-shell/dash-to-panel]
+blur-original-panel=true
+
+[blur-my-shell/hidetopbar]
+compatibility=false
+
+[blur-my-shell/overview]
+blur=true
+customize=false
+
+[blur-my-shell/panel]
+blur=true
+brightness=0.68999999999999995
+customize=false
+noise-amount=0.040000000000000001
+override-background=true
+override-background-dynamically=false
+sigma=0
+static-blur=true
+style-panel=0
+unblur-in-overview=true
+
+[just-perfection]
+accessibility-menu=false
+activities-button=false
+activities-button-icon-monochrome=true
+activities-button-label=true
+alt-tab-small-icon-size=0
+alt-tab-window-preview-size=0
+animation=4
+app-menu=false
+app-menu-icon=true
+app-menu-label=false
+background-menu=true
+calendar=true
+clock-menu=true
+clock-menu-position=2
+clock-menu-position-offset=0
+dash=false
+dash-app-running=false
+dash-icon-size=0
+dash-separator=false
+double-super-to-appgrid=false
+events-button=true
+keyboard-layout=true
+notification-banner-position=5
+overlay-key=true
+panel=true
+panel-notification-icon=true
+power-icon=true
+quick-settings=true
+ripple-box=true
+screen-sharing-indicator=true
+search=false
+show-apps-button=false
+switcher-popup-delay=false
+theme=false
+weather=false
+window-demands-attention-focus=false
+window-menu-take-screenshot-button=false
+window-preview-caption=false
+window-preview-close-button=true
+workspace=true
+workspace-peek=true
+workspace-popup=true
+workspace-switcher-should-show=false
+workspace-switcher-size=6
+workspace-wrap-around=false
+workspaces-in-app-grid=true
+world-clock=false
+
+[mediacontrols]
+cache-images=false
+clip-texts-menu=true
+colored-player-icon=false
+extension-index=0
+extension-position='center'
+hide-media-notification=true
+max-widget-width=350
+mouse-actions=['toggle_play', 'none', 'none', 'none', 'none', 'volume_up', 'volume_down', 'none']
+prefer-using-seek=false
+scroll-track-label=false
+seek-interval-secs=5
+seperator-chars=['|', '|']
+show-control-icons=true
+show-player-icon=false
+show-playpause-icon=true
+show-prev-icon=true
+show-seek-forward=true
+show-seperators=true
+show-sources-menu=false
+show-text=true
+
+[quick-settings-avatar]
+avatar-nobackground=true
+avatar-position=1
+avatar-size=50
+
+[quick-settings-tweaks]
+add-dnd-quick-toggle-enabled=false
+add-unsafe-quick-toggle-enabled=false
+datemenu-remove-media-control=true
+disable-remove-shadow=false
+input-always-show=true
+input-show-selected=false
+last-unsafe-state=false
+list-buttons='[{"name":"SystemItem","label":null,"visible":true},{"name":"OutputStreamSlider","label":null,"visible":true},{"name":"InputStreamSlider","label":null,"visible":false},{"name":"BrightnessItem","label":null,"visible":true},{"name":"NMWiredToggle","label":null,"visible":false},{"name":"NMWirelessToggle","label":null,"visible":true},{"name":"NMModemToggle","label":null,"visible":false},{"name":"NMBluetoothToggle","label":null,"visible":false},{"name":"NMVpnToggle","label":null,"visible":false},{"name":"BluetoothToggle","label":null,"visible":true},{"name":"PowerProfilesToggle","label":null,"visible":true},{"name":"NightLightToggle","label":null,"visible":true},{"name":"DarkModeToggle","label":null,"visible":true},{"name":"RfkillToggle","label":null,"visible":true},{"name":"RotationToggle","label":null,"visible":false},{"name":"Notifications","label":null,"visible":true}]'
+media-control-compact-mode=false
+media-control-enabled=false
+notifications-enabled=true
+output-show-selected=false
+user-removed-buttons=['NightLightToggle', 'DarkModeToggle']
+volume-mixer-enabled=false
+volume-mixer-position='top'
+volume-mixer-show-description=true
+
+[quicksettings-audio-devices-hider]
+available-input-names=['Digital Microphone – Raptor Lake-P/U/H cAVS', 'Handsfree – HUAWEI FreeBuds 5i']
+available-output-names=['Speaker – Raptor Lake-P/U/H cAVS', 'Handsfree – HUAWEI FreeBuds 5i', 'Headset – HUAWEI FreeBuds 5i']
+excluded-input-names=['Handsfree – HUAWEI FreeBuds 5i']
+excluded-output-names=['HDMI / DisplayPort – HDA NVidia', 'Digital Output (S/PDIF) – USB Audio Device', 'Speakers – USB Audio Device', 'Handsfree – HUAWEI FreeBuds 5i']
+
+[smart-auto-move]
+activate-workspace=true
+debug-logging=false
+freeze-saves=false
+ignore-position=false
+ignore-workspace=false
+match-threshold=0.69999999999999996
+overrides='{}'
+save-frequency=1000
+saved-windows='{"Google-chrome":[{"id":4053776417,"hash":4053776417,"sequence":5,"title":"Smart Auto Move - GNOME Shell Extensions - Google Chrome","workspace":1,"maximized":3,"fullscreen":false,"above":false,"monitor":0,"x":0,"y":42,"width":2560,"height":1558,"occupied":true}],"gnome-extensions-app":[{"id":4053776415,"hash":4053776415,"sequence":3,"title":"Extensions","workspace":0,"maximized":0,"fullscreen":false,"above":false,"monitor":0,"x":833,"y":307,"width":800,"height":911,"occupied":true}],"Firefox-esr":[{"id":4053776414,"hash":4053776414,"sequence":2,"title":"Google Keep — Mozilla Firefox","workspace":0,"maximized":3,"fullscreen":false,"above":false,"monitor":0,"x":0,"y":42,"width":2560,"height":1558,"occupied":true}],"kitty":[{"id":4053776422,"hash":4053776422,"sequence":10,"title":"fish in ~","workspace":0,"maximized":2,"fullscreen":false,"above":false,"monitor":0,"x":1280,"y":42,"width":1280,"height":1558,"occupied":false}]}'
+startup-delay=2500
+sync-frequency=100
+sync-mode='RESTORE'
+
+[tiling-assistant]
+activate-layout0=@as []
+activate-layout1=@as []
+activate-layout2=@as []
+activate-layout3=@as []
+active-window-hint=1
+active-window-hint-color='rgb(53,132,228)'
+auto-tile=@as []
+center-window=@as []
+debugging-free-rects=@as []
+debugging-show-tiled-rects=@as []
+default-move-mode=0
+dynamic-keybinding-behavior=0
+enable-tiling-popup=false
+import-layout-examples=false
+last-version-installed=45
+maximize-with-gap=true
+overridden-settings={'org.gnome.mutter.edge-tiling': <@mb nothing>, 'org.gnome.desktop.wm.keybindings.maximize': <@mb nothing>, 'org.gnome.desktop.wm.keybindings.unmaximize': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-left': <@mb nothing>, 'org.gnome.mutter.keybindings.toggle-tiled-right': <@mb nothing>}
+restore-window=['<Super>Down']
+search-popup-layout=@as []
+single-screen-gap=20
+tile-bottom-half=['<Super>KP_2']
+tile-bottom-half-ignore-ta=@as []
+tile-bottomleft-quarter=['<Super>KP_1']
+tile-bottomleft-quarter-ignore-ta=@as []
+tile-bottomright-quarter=['<Super>KP_3']
+tile-bottomright-quarter-ignore-ta=@as []
+tile-edit-mode=@as []
+tile-left-half=['<Super>Left', '<Super>KP_4']
+tile-left-half-ignore-ta=@as []
+tile-maximize=['<Super>Up', '<Super>KP_5']
+tile-maximize-horizontally=@as []
+tile-maximize-vertically=@as []
+tile-right-half=['<Super>Right', '<Super>KP_6']
+tile-right-half-ignore-ta=@as []
+tile-top-half=['<Super>KP_8']
+tile-top-half-ignore-ta=@as []
+tile-topleft-quarter=['<Super>KP_7']
+tile-topleft-quarter-ignore-ta=@as []
+tile-topright-quarter=['<Super>KP_9']
+tile-topright-quarter-ignore-ta=@as []
+toggle-always-on-top=@as []
+toggle-tiling-popup=@as []
+window-gap=16
+
+[top-bar-organizer]
+center-box-order=['media_controls_extension']
+left-box-order=['menuButton', 'activities', 'appMenu', 'dateMenu', 'TrayIconsReloaded']
+right-box-order=['tiling-assistant@leleat-on-github', 'screenRecording', 'screenSharing', 'dwellClick', 'a11y', 'keyboard', 'vitalsMenu', 'quickSettings']
+
+[trayIconsReloaded]
+applications='[{"id":"gnome-pie.desktop","hidden":true}]'
+icon-contrast=0
+icon-margin-horizontal=0
+icon-margin-vertical=0
+icon-padding-horizontal=12
+icon-padding-vertical=0
+icon-saturation=0
+icon-size=20
+icons-limit=4
+invoke-to-workspace=true
+tray-margin-left=4
+tray-margin-right=0
+tray-position='left'
+
+[user-theme]
+name='Orchis-Green-Dark'
+
+[vitals]
+alphabetize=true
+fixed-widths=false
+hide-icons=false
+hide-zeros=false
+hot-sensors=['_memory_usage_', '__temperature_avg__', '_processor_usage_']
+position-in-panel=2
+show-battery=true
+show-fan=false
+show-storage=false
+show-system=false
+show-temperature=true
+show-voltage=true
+storage-measurement=1
+storage-path='/home/andrey/'
+update-time=3
