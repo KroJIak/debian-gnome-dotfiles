@@ -226,7 +226,7 @@ gnome-extensions enable Bluetooth-Battery-Meter@maniacx.github.com
 gnome-extensions enable blur-my-shell@aunetx
 gnome-extensions enable trayIconsReloaded@selfmade.pl
 gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
-gnome-extensions enable  user-theme@gnome-shell-extensions.gcampax.github.com
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 ```
 ### Setting themes
 To make the system look beautiful, I use [theme for the appearance](https://github.com/vinceliuice/Orchis-theme) of the desktop and a [theme for loading grub](https://github.com/adi1090x/plymouth-themes), disabling all logs and dialog boxes.

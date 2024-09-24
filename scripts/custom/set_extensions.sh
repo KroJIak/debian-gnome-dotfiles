@@ -16,4 +16,4 @@ gnome-extensions enable Bluetooth-Battery-Meter@maniacx.github.com
 gnome-extensions enable blur-my-shell@aunetx
 gnome-extensions enable trayIconsReloaded@selfmade.pl
 gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
-gnome-extensions enable  user-theme@gnome-shell-extensions.gcampax.github.com
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
