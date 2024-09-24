@@ -18,7 +18,7 @@ bash docker.sh
 echo "[Stage 1] Applications | Installing yandex_music"
 bash yandex_music.sh
 echo "[Stage 1] Applications | Autoremove"
-sudo apt autoremove
+sudo apt autoremove -y
 echo "[Stage 1] Applications | Done"
 cd ..
 
