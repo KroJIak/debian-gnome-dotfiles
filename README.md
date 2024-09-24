@@ -28,6 +28,7 @@ This repository was created to quickly install my settings, configs and applicat
 
 ![Gnome pie view](assets/gnome-pie.gif)
 # Setup
+`total installation time:` **`21 minutes`**
 ## Debian Expert Installer
 First, you need to install the Debian 12 image. The installation can be done via a USB flash drive.
 Next, select the following options:
