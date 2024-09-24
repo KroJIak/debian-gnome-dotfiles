@@ -21,7 +21,7 @@ This repository was created to quickly install my settings, configs and applicat
 - **Media Player:** MPV
 - **GTK Theme:** Orchis green dark
 
-![alt text](assets/media-player-and-theme.png)
+![Media player and theme view](assets/media-player-and-theme.png)
 - **Web Browser:** Firefox
 - **Torrent Client:** qBitTorrent
 - **Quick Access Toolbar (Dock replacement):** Gnome Pie
@@ -260,7 +260,7 @@ sudo update-initramfs -u
 ```
 ## Extra Steps
 - Be careful with the automatic installation. The scripts are not perfect and maybe some will not work for you, as they may only fit my system or account. I advise you to figure out each step of the installation yourself
-- After any of the installations, do not forget to change the graphics platform from wayland to Xorg, otherwise at least the gnome pie menu will not work: ![alt text](assets/switch-wayland-to-x11.gif)
+- After any of the installations, do not forget to change the graphics platform from wayland to Xorg, otherwise at least the gnome pie menu will not work: ![switch wayland to x11 tutorial](assets/switch-wayland-to-x11.gif)
 - I noticed that some applications cannot save the result if the window is closed not through the X (cross) button, but simply by closing (for example, when old keys are rebinded. To return the window close button, enter the command: `gsettings set org.gnome.desktop.wm.preferences button-layout :close`
 # Keybinds
 Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
