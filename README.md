@@ -129,21 +129,15 @@ sudo apt remove gnome-screenshot && sudo apt install -y flameshot
 For my tasks, I use the following minimal application stack. This installation is optional.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y telegram-desktop qbittorrent
+sudo apt install -y qbittorrent
 sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
+sudo snap install telegram-desktop
 sudo snap install discord
 sudo snap install arduino
 sudo usermod -a -G dialout $USER
-```
-AnyDesk **([anydesk.sh](scripts/apps/anydesk.sh))**:
-```Terminal
-wget -qO https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo apt-key add -
-sudo echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
-sudo apt update -y
-sudo apt install anydesk -y
 ```
 Docker **([docker.sh](scripts/apps/docker.sh))**:
 ```Terminal
@@ -264,7 +258,7 @@ sudo rm -r /usr/share/plymouth/themes/cubes
 sudo cp -r ../../../grub-theme /usr/share/plymouth/themes/cubes
 
 # install the new theme (angular, in this case)
-sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/cubes/cubes.plymouth 100
+sudo update-alternatives -telegram-desktop-install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/cubes/cubes.plymouth 100
 
 # select the theme to apply
 sudo plymouth-set-default-theme cubes

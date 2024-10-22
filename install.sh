@@ -11,8 +11,6 @@ echo "[Stage 1] Applications | Installing required applications"
 bash required_apps.sh
 echo "[Stage 1] Applications | Installing optional applications"
 bash optional_apps.sh
-echo "[Stage 1] Applications | Installing anydesk"
-bash anydesk.sh
 echo "[Stage 1] Applications | Installing docker"
 bash docker.sh
 echo "[Stage 1] Applications | Installing yandex_music"
