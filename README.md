@@ -134,7 +134,7 @@ sudo snap install pycharm-community --classic
 sudo snap install intellij-idea-community --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
-sudo snap install telegram-desktop
+# sudo snap install telegram-desktop # | Optionally install ayugram-desktop from telegram channel
 sudo snap install discord
 sudo snap install arduino
 sudo usermod -a -G dialout $USER
@@ -223,6 +223,19 @@ gnome-extensions enable trayIconsReloaded@selfmade.pl
 gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 ```
+#### Updating ssh config **([update_ssh_config.sh](scripts/custom/update_ssh.config.sh))**:
+```
+#!/bin/bash
+
+SSH_CONFIG_FILE="$HOME/.ssh/config"
+
+if [ ! -f "$SSH_CONFIG_FILE" ]; then
+    touch "$SSH_CONFIG_FILE"
+fi
+
+echo -e "\n# HostKeyAlgorithms for all hosts" >> "$SSH_CONFIG_FILE"
+echo -e "\nHost *\n    HostKeyAlgorithms +ssh-rsa" >> "$SSH_CONFIG_FILE"
+```
 ### Setting themes
 To make the system look beautiful, I use [theme for the appearance](https://github.com/vinceliuice/Orchis-theme) of the desktop and a [theme for loading grub](https://github.com/adi1090x/plymouth-themes), disabling all logs and dialog boxes.
 #### Orchis theme (desktop)
@@ -302,3 +315,17 @@ Some material was taken from other repositories and has been slightly modified:
 - [Orchis theme](https://github.com/vinceliuice/Orchis-theme) | **Author:** [vinceliuice](https://github.com/vinceliuice) | **Taken:** green dark theme
 - [Huawei ubuntu sound fix](https://github.com/Smoren/huawei-ubuntu-sound-fix) | **Author:** [Smoren](https://github.com/Smoren) | **Info:** for huawei 14s / 16s users (also work with Debian)
 - [plymouth themes](https://github.com/adi1090x/plymouth-themes) | **Author:** [adi1090x](https://github.com/adi1090x) | **Taken:** used `cubes` theme from pack 1
+
+
+1. Редактирование файла конфигурации SSH клиента:
+
+    Откройте терминал/командную строку на вашем компьютере.
+
+    Отредактируйте файл конфигурации SSH, который обычно находится по пути ~/.ssh/config (или /etc/ssh/ssh_config для глобальных настроек). Если файла config нет, создайте его.
+
+    Добавьте или отредактируйте следующие строки, заменив 192.168.0.1 на IP-адрес вашего OpenWrt роутера:
+
+    Host 192.168.0.1
+        HostKeyAlgorithms=+ssh-rsa
+
+folder experiments

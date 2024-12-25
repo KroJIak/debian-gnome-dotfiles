@@ -37,6 +37,8 @@ echo "[Stage 3] Custom scripts | Insert settings"
 bash settings.sh
 echo "[Stage 3] Custom scripts | Insert extensions"
 bash set_extensions.sh
+echo "[Stage 3] Custom scripts | Update ssh config"
+bash update_ssh_config.sh
 echo "[Stage 3] Custom scripts | Set grub theme"
 cd grub
 bash setup.sh
