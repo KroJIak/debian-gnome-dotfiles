@@ -28,7 +28,7 @@ This repository was created to quickly install my settings, configs and applicat
 
 ![Gnome pie view](assets/gnome-pie.gif)
 # Setup
-`total installation time:` **`21 minutes`**
+`Total installation time:` **`21 minutes`**
 ## Debian Expert Installer
 First, you need to install the Debian 12 image. The installation can be done via a USB flash drive.
 Next, select the following options:
@@ -88,7 +88,7 @@ Next, select the following options:
 - Is the system clock set to UTC?: `Yes`
 - Please choose `<Continue>` to reboot: `Continue`
 ## Automatic installation
-in order not to manually install all the components, a script ([install.sh](install.sh)) was built to install each of the stages automatically. Also, don't forget to look at the #Extra Steps tab
+In order not to manually install all the components, a script ([install.sh](install.sh)) was built to install each of the stages automatically. Also, don't forget to look at the #Extra Steps tab
 
 If you do not want to install something from below, the installation of each component is scheduled in stages.
 ## Manual installation
@@ -287,9 +287,9 @@ Keybinds were made based on the names of applications or associations with them.
 - **`Super + Enter`** Launch terminal
 - **`Alt + A`** Launch Gnome Pie
 - **`Super + Q`** Close window
-- **`Super + W`** Launch Web Browser
+- **`Super + W`** Launch Firefox
 - **`Super + E`** Launch Nautilus
-- **`Super + T`** Launch Telegram
+- **`Super + T`** Launch Ayugram
 - **`Super + Y`** Launch Yandex music
 - **`Super + O`** Launch Obsidian
 - **`Super + P`** Change the monitor mode
