@@ -48,12 +48,12 @@ Next, select the following options:
 #### Configure the network
 - Auto-configure networking?: `Yes`
 - Just click `Continue`
-- Hostname: измените его на то, что вы хотите (например, `"andrey-debian"`)
+- Hostname: change it to what you want (for example, `"andrey-huawei"`)
 - Domain name: `Continue`
 #### Set up users and passwords
 - Allow login as root?: `No`
 - Full name for the new user: you can just skip
-- Username for your account: preferably in small letters (it will be more convenient, for example, `"andrey"`)
+- Username for your account: preferably in small letters (it will be more convenient, for example, `"andrey-debian"`)
 - Choose a password for the new user: Just a password
 #### Configure the clock
 - Set the clock using NTP?: `Yes`
@@ -74,7 +74,7 @@ Next, select the following options:
 - Debian archive mirror: `deb.debian.org`
 - Just click `Continue`
 - Use non-free firmware?: `Yes`
-- Use non-free firmware?: `Yes`
+- Use non-free software?: `Yes`
 - Enable source repositories in APT?: `Yes`
 - Services to use: Just click `Continue`
 #### Select and install software
@@ -131,7 +131,7 @@ For my tasks, I use the following minimal application stack. This installation i
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install -y qbittorrent
 sudo snap install pycharm-community --classic
-sudo snap install intellij-idea-community --classic
+sudo snap install intellij-idea-ultimate --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
 # sudo snap install telegram-desktop # | Optionally install ayugram-desktop from telegram channel

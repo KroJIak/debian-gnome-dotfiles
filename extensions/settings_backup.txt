@@ -232,5 +232,5 @@ show-system=false
 show-temperature=true
 show-voltage=true
 storage-measurement=1
-storage-path='/home/andrey/'
+storage-path='/home/andrey-debian/'
 update-time=3

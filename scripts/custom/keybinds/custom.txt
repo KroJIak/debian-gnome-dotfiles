@@ -9,5 +9,5 @@
 "nautilus" "nautilus" "<Super>E"
 "obsidian" "obsidian" "<Super>O"
 "settings" "gnome-control-center" "<Super>S"
-"telegram" "telegram-desktop" "<Super>T"
+"telegram" "ayugram-desktop" "<Super>T"
 "yandex music" "yandex-music" "<Super>Y"
