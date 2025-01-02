@@ -1,7 +1,8 @@
 #!/bin/bash
 
 sudo snap install btop
-sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch mpv
+sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch mpv openvpn network-manager-openvpn-gnome
+
 
 # Change the default shell to fish
 chsh $USER -s /usr/bin/fish
