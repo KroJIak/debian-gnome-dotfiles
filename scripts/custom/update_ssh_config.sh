@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir $HOME/.ssh
 SSH_CONFIG_FILE="$HOME/.ssh/config"
 
 if [ ! -f "$SSH_CONFIG_FILE" ]; then
