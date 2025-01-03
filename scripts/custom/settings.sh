@@ -28,7 +28,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
 # large text
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.25
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
 # disable minimize and close buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout :
 # enable scrolling in firefox by touchscreen
