@@ -223,8 +223,7 @@ gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 ```
 #### Updating ssh config **([update_ssh_config.sh](scripts/custom/update_ssh.config.sh))**:
 ```
-#!/bin/bash
-
+mkdir $HOME/.ssh
 SSH_CONFIG_FILE="$HOME/.ssh/config"
 
 if [ ! -f "$SSH_CONFIG_FILE" ]; then
