@@ -5,6 +5,7 @@
 "discord" "discord" "<Super>D"
 "flameshot" "flameshot gui" "Print"
 "flameshot config" "flameshot config" "<Shift>Print"
+"kando" "kando" "<Alt>A"
 "kitty" "kitty" "<Super>Return"
 "nautilus" "nautilus" "<Super>E"
 "obsidian" "obsidian" "<Super>O"

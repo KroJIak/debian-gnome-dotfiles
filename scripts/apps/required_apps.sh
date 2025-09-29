@@ -1,10 +1,7 @@
 #!/bin/bash
 
 sudo snap install btop
-sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch mpv openvpn network-manager-openvpn-gnome
-
-
-# Change the default shell to fish
-sudo chsh $USER -s /usr/bin/fish
+sudo apt install -y pulseaudio curl rsync gnome-shell-extensions zip tree make
+sudo apt install -y dconf-editor grub-customizer git neofetch mpv gnome-shell-extension-manager chrome-gnome-shell
 
 sudo apt remove gnome-screenshot && sudo apt install -y flameshot

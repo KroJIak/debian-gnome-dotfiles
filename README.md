@@ -112,7 +112,7 @@ sudo apt install snapd -y
 The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
 ```Terminal
 sudo snap install btop
-sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch mpv openvpn network-manager-openvpn-gnome
+sudo apt install -y dconf-editor fish grub-customizer kitty pulseaudio curl git neofetch mpv rsync gnome-shell-extensions gnome-shell-extension-manager chrome-gnome-shell zip tree
 
 # Change the default shell to fish
 sudo chsh $USER -s /usr/bin/fish
