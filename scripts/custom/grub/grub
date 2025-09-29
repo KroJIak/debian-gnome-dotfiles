@@ -3,37 +3,40 @@
 # For full documentation of the options in this file, see:
 #   info -f grub -n 'Simple configuration'
 
-GRUB_DEFAULT="saved"
+# Настройки по умолчанию и таймаута
+GRUB_DEFAULT="Debian"
 GRUB_TIMEOUT="7"
+GRUB_SAVEDEFAULT="false"
 GRUB_DISTRIBUTOR="`lsb_release -i -s 2> /dev/null || echo Debian`"
+
+# Параметры ядра Linux
 GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=0 splash"
 GRUB_CMDLINE_LINUX=""
 
-# If your computer has multiple operating systems installed, then you
-# probably want to run os-prober. However, if your computer is a host
-# for guest OSes installed via LVM or raw disk devices, running
-# os-prober can cause damage to those guest OSes as it mounts
-# filesystems to look for things.
+# Настройки для мультизагрузки
+# Включен os-prober для обнаружения других ОС (Windows, Ubuntu)
 GRUB_DISABLE_OS_PROBER="false"
 
-# Uncomment to enable BadRAM filtering, modify to suit your needs
-# This works with Linux (no patch required) and with any kernel that obtains
-# the memory map information from GRUB (GNU Mach, kernel of FreeBSD ...)
-#GRUB_BADRAM="0x01234567,0xfefefefe,0x89abcdef,0xefefefef"
+# Настройки темы и графики
+GRUB_THEME="/boot/grub/themes/dedsec/theme.txt"
+GRUB_GFXMODE="1920x1080"
+GRUB_GFXPAYLOAD_LINUX="keep"
 
-# Uncomment to disable graphical terminal
-#GRUB_TERMINAL="console"
-
-# The resolution used on graphical terminal
-# note that you can use only modes which your graphic card supports via VBE
-# you can see them in real GRUB with the command `vbeinfo'
-#GRUB_GFXMODE="640x480"
-
-# Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to Linux
-#GRUB_DISABLE_LINUX_UUID="true"
-
-# Uncomment to disable generation of recovery mode menu entries
+# Настройки меню
+# Скрыть пункты восстановления (можно раскомментировать для отображения)
 #GRUB_DISABLE_RECOVERY="true"
 
-# Uncomment to get a beep at grub start
+# Настройки терминала
+#GRUB_TERMINAL="console"
+
+# Дополнительные настройки
+#GRUB_BADRAM="0x01234567,0xfefefefe,0x89abcdef,0xefefefef"
+#GRUB_DISABLE_LINUX_UUID="true"
 #GRUB_INIT_TUNE="480 440 1"
+
+# Настройки для скрытия пунктов меню (если нужно)
+# Скрыть пункты восстановления
+GRUB_DISABLE_RECOVERY="true"
+
+# Настройки для улучшения производительности
+GRUB_TIMEOUT_STYLE="menu"
