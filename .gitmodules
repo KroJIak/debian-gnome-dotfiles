@@ -4,3 +4,6 @@
 [submodule "scripts/apps/extra/redvpn"]
 	path = scripts/apps/extra/redvpn
 	url = https://github.com/KroJIak/redvpn-client-manager.git
+[submodule "scripts/fixes/fnkeys"]
+	path = scripts/fixes/fnkeys
+	url = https://github.com/KroJIak/huawei-fnkeys-debian-fix.git
