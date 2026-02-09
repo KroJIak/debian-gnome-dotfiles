@@ -1,3 +1,3 @@
 [submodule "fixes/x11-fractional-scaling"]
-	path = fixes/x11-fractional-scaling
+	path = scripts/fixes/x11-fractional-scaling
 	url = https://github.com/KroJIak/debian-gnome-x11-fractional-scaling.git
