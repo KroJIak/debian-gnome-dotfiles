@@ -7000,7 +7000,7 @@ scrolledwindow.inline undershoot.top {
 }
 
 .search-view {
-  background-color: #7fbbb3;
+  background-color: #a7c080;
   color: rgba(39, 46, 51, 0.87);
 }
 
@@ -7114,7 +7114,7 @@ image.circular {
 }
 
 .night .clock-time {
-  color: #7fbbb3;
+  color: #a7c080;
   background-color: alpha(#3a94c5, 0.25);
 }
 

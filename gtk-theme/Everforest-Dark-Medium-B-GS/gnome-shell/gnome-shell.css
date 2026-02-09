@@ -63,7 +63,7 @@
   height: 48px;
   border-radius: 24px;
   background-color: rgba(227, 240, 238, 0.3);
-  box-shadow: 0 0 2px 2px #c2dedb;}
+  box-shadow: 0 0 2px 2px #a7c080;}
 
 .pie-timer {
   width: 60px;
@@ -80,15 +80,15 @@
 
 .shell-link {
   border-radius: 12px;
-  color: #81bea3;}
+  color: #a7c080;}
 
 .shell-link:hover {
-  color: #81bea3;
-  background-color: rgba(129, 190, 163, 0.15);}
+  color: #a7c080;
+  background-color: rgba(143, 176, 112, 0.15);}
 
 .shell-link:active {
-  color: #81bea3;
-  background-color: rgba(129, 190, 163, 0.25);}
+  color: #a7c080;
+  background-color: rgba(143, 176, 112, 0.25);}
 
 .lowres-icon {
   icon-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);}
@@ -262,7 +262,7 @@
 /* Activities Ripple */
 .ripple-box {
   background-color: rgba(167, 192, 128, 0.35);
-  box-shadow: 0 0 2px 2px #c2dedb;
+  box-shadow: 0 0 2px 2px #a7c080;
   width: 52px;
   height: 52px;
   border-radius: 0 0 52px 0;}
@@ -283,11 +283,11 @@
 
 .modal-dialog-button:hover:last-child, .modal-dialog-linked-button:hover:last-child {
   color: #272e33;
-  background-color: #9dcbc5;}
+  background-color: #8fb070;}
 
 .modal-dialog-button:active:last-child, .modal-dialog-linked-button:active:last-child {
   color: #272e33;
-  background-color: #6eb2a9;}
+  background-color: #7aa061;}
 
 .modal-dialog-button:insensitive:last-child, .modal-dialog-linked-button:insensitive:last-child {
   color: rgba(167, 192, 128, 0.35);
@@ -1003,7 +1003,7 @@ StEntry StLabel.hint-text,
   selected-color: rgba(39, 46, 51, 0.87);}
 
 .lg-dialog .shell-link {
-  color: #81bea3;}
+  color: #a7c080;}
 
 .lg-dialog .shell-link:hover {
   color: #a3cfbc;}
@@ -2230,7 +2230,7 @@ StWidget.focused .app-grid-running-dot {
   color: #fffbef !important;}
 
 .calendar .calendar-today:active {
-  background-color: #6eb2a9;
+  background-color: #a7c080;
   color: rgba(39, 46, 51, 0.87) !important;}
 
 .calendar .calendar-today:selected {
@@ -2506,11 +2506,11 @@ StWidget.focused .app-grid-running-dot {
   color: #272e33;}
 
 .modal-dialog-button:hover:last-child, .modal-dialog-linked-button:hover:last-child {
-  background-color: #9dcbc5;
+  background-color: #8fb070;
   color: #272e33;}
 
 .modal-dialog-button:active:last-child, .modal-dialog-linked-button:active:last-child {
-  background-color: #6eb2a9;
+  background-color: #7aa061;
   color: #272e33;}
 
 .modal-dialog-button:insensitive:last-child, .modal-dialog-linked-button:insensitive:last-child {
@@ -2694,11 +2694,11 @@ StWidget.focused .app-grid-running-dot {
   color: #272e33;}
 
 .modal-dialog-linked-button:hover:last-child, .modal-dialog-button:hover:last-child {
-  background-color: #9dcbc5;
+  background-color: #8fb070;
   color: #272e33;}
 
 .modal-dialog-linked-button:active:last-child, .modal-dialog-button:active:last-child {
-  background-color: #6eb2a9;
+  background-color: #7aa061;
   color: #272e33;}
 
 .modal-dialog-linked-button:insensitive:last-child, .modal-dialog-button:insensitive:last-child {
@@ -3050,7 +3050,7 @@ StWidget.focused .app-grid-running-dot {
   font-weight: bold;}
 
 .url-highlighter {
-  link-color: #81bea3;}
+  link-color: #a7c080;}
 
 .message-media-control {
   margin: 4px 6px;
@@ -3245,7 +3245,7 @@ StWidget.focused .app-grid-running-dot {
   font-weight: bold;}
 
 .url-highlighter {
-  link-color: #81bea3;}
+  link-color: #a7c080;}
 
 .message-media-control {
   margin: 4px 6px;
@@ -3488,7 +3488,7 @@ StWidget.focused .app-grid-running-dot {
   font-weight: bold;}
 
 .url-highlighter {
-  link-color: #81bea3;}
+  link-color: #a7c080;}
 
 .message-media-control {
   margin: 4px 6px;

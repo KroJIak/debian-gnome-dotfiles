@@ -92,17 +92,17 @@
 
 .shell-link {
   border-radius: 12px;
-  color: #81bea3;
+  color: #a7c080;
 }
 
 .shell-link:hover {
-  color: #81bea3;
-  background-color: rgba(129, 190, 163, 0.15);
+  color: #a7c080;
+  background-color: rgba(143, 176, 112, 0.15);
 }
 
 .shell-link:active {
-  color: #81bea3;
-  background-color: rgba(129, 190, 163, 0.25);
+  color: #a7c080;
+  background-color: rgba(143, 176, 112, 0.25);
 }
 
 .lowres-icon {
@@ -1208,7 +1208,7 @@ StEntry StLabel.hint-text,
 }
 
 .lg-dialog .shell-link {
-  color: #81bea3;
+  color: #a7c080;
 }
 
 .lg-dialog .shell-link:hover {
@@ -3667,7 +3667,7 @@ StWidget.focused .app-grid-running-dot {
 }
 
 .url-highlighter {
-  link-color: #81bea3;
+  link-color: #a7c080;
 }
 
 .message-media-control {
@@ -3908,7 +3908,7 @@ StWidget.focused .app-grid-running-dot {
 }
 
 .url-highlighter {
-  link-color: #81bea3;
+  link-color: #a7c080;
 }
 
 .message-media-control {
@@ -4221,7 +4221,7 @@ StWidget.focused .app-grid-running-dot {
 }
 
 .url-highlighter {
-  link-color: #81bea3;
+  link-color: #a7c080;
 }
 
 .message-media-control {

@@ -940,7 +940,7 @@ button.color {
  * Links *
  *********/
 *:link {
-  color: #81bea3;
+  color: #a7c080;
 }
 
 *:visited {
@@ -948,7 +948,7 @@ button.color {
 }
 
 button.link:link, button.link:link:focus, button.link:link:hover, button.link:link:active {
-  color: #81bea3;
+  color: #a7c080;
 }
 
 button.link:visited, button.link:visited:focus, button.link:visited:hover, button.link:visited:active {
