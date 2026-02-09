@@ -89,6 +89,11 @@ Next, select the following options:
 ## Automatic installation
 In order not to manually install all the components, a script ([install.sh](install.sh)) was built to install each of the stages automatically. Also, don't forget to look at the #Extra Steps tab
 
+If you cloned this repo without submodules, initialize them first:
+```Terminal
+git submodule update --init --recursive
+```
+
 If you do not want to install something from below, the installation of each component is scheduled in stages.
 ## Manual installation
 ### Removing applications
