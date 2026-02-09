@@ -8,7 +8,6 @@ sudo apt install -y qbittorrent
 sudo apt install -y czkawka
 sudo apt install -y pdfarranger
 sudo snap install intellij-idea-ultimate --classic
-sudo snap install code --classic
 sudo snap install obsidian --classic
 sudo snap install discord
 
@@ -21,4 +20,6 @@ fi
 
 bash "$SCRIPT_DIR/extra/40-docker.sh"
 bash "$SCRIPT_DIR/extra/50-yandex-music.sh"
+bash "$SCRIPT_DIR/extra/55-vscode.sh"
+bash "$SCRIPT_DIR/extra/75-tailscale.sh"
 bash "$SCRIPT_DIR/extra/80-arduino.sh"
