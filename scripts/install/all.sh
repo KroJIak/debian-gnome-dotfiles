@@ -5,8 +5,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../lib/common.sh
 source "$SCRIPT_DIR/../lib/common.sh"
 
-bash "$SCRIPT_DIR/apps.sh"
-bash "$SCRIPT_DIR/fixes.sh"
-bash "$SCRIPT_DIR/system.sh"
+if [[ "${DOTFILES_ONLY_FIXES:-0}" -eq 1 ]]; then
+	bash "$SCRIPT_DIR/fixes.sh"
+elif [[ "${DOTFILES_ONLY_SYSTEM:-0}" -eq 1 ]]; then
+	bash "$SCRIPT_DIR/system.sh"
+else
+	bash "$SCRIPT_DIR/apps.sh"
+	bash "$SCRIPT_DIR/fixes.sh"
+	bash "$SCRIPT_DIR/system.sh"
+fi
 
-log "Done. Please, reboot the system and don't forget to enable extensions (scripts/system/enable-extensions.sh)."
+ok "Done. Please reboot for changes to take effect."

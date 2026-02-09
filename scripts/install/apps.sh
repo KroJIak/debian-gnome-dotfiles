@@ -14,8 +14,12 @@ log "[Stage 1] Applications | Install flatpak"
 bash "$REPO_ROOT/scripts/apps/15-flatpak.sh"
 log "[Stage 1] Applications | Install required apps"
 bash "$REPO_ROOT/scripts/apps/20-required.sh"
-log "[Stage 1] Applications | Install optional apps"
-bash "$REPO_ROOT/scripts/apps/30-optional.sh"
+if [[ "${DOTFILES_SKIP_OPTIONAL_APPS:-0}" -eq 1 ]]; then
+	warn "[Stage 1] Applications | Skipping optional apps"
+else
+	log "[Stage 1] Applications | Install optional apps"
+	bash "$REPO_ROOT/scripts/apps/30-optional.sh"
+fi
 log "[Stage 1] Applications | Autoremove"
 sudo apt autoremove -y
 log "[Stage 1] Applications | Done"

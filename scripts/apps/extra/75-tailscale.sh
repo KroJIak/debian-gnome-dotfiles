@@ -3,9 +3,11 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
+# shellcheck source=../../lib/common.sh
+source "$SCRIPT_DIR/../../lib/common.sh"
 
 if ! grep -q "tailscale" "$REPO_ROOT/extensions/settings_backup.txt"; then
-	echo "Warning: tailscale commands are missing from extensions/settings_backup.txt." >&2
+	warn "tailscale commands are missing from extensions/settings_backup.txt."
 fi
 
 curl -fsSL https://tailscale.com/install.sh | sh

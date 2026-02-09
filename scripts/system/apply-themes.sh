@@ -2,6 +2,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../lib/common.sh
+source "$SCRIPT_DIR/../lib/common.sh"
 THEMES_DIR="$SCRIPT_DIR/../../gtk-theme"
 
 mkdir -p "$HOME/.themes"
@@ -14,11 +16,11 @@ gsettings set org.gnome.shell.extensions.user-theme name 'Everforest-Dark-Medium
 if command -v gnome-extensions >/dev/null 2>&1; then
 	if gnome-extensions info user-theme@gnome-shell-extensions.gcampax.github.com >/dev/null 2>&1; then
 		if ! gnome-extensions list --enabled | grep -q '^user-theme@gnome-shell-extensions.gcampax.github.com$'; then
-			echo "Warning: user-theme extension is installed but not enabled." >&2
+			warn "user-theme extension is installed but not enabled."
 		fi
 	else
-		echo "Warning: user-theme extension is not installed; Shell theme may not apply." >&2
+		warn "user-theme extension is not installed; Shell theme may not apply."
 	fi
 else
-	echo "Warning: gnome-extensions not found; cannot verify user-theme extension." >&2
+	warn "gnome-extensions not found; cannot verify user-theme extension."
 fi

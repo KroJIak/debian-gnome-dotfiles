@@ -2,6 +2,8 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../../lib/common.sh
+source "$SCRIPT_DIR/../../lib/common.sh"
 
 sudo snap install code --classic
 
@@ -11,7 +13,7 @@ if command -v code >/dev/null 2>&1; then
 elif [ -x "/snap/bin/code" ]; then
 	code_cmd="/snap/bin/code"
 else
-	echo "VS Code CLI not found after install." >&2
+	warn "VS Code CLI not found after install."
 	exit 1
 fi
 

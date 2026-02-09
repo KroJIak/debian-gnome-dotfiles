@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../../lib/common.sh
+source "$SCRIPT_DIR/../../lib/common.sh"
+
 REPO="0FL01/AyuGramDesktop-flatpak"
 API="https://api.github.com/repos/${REPO}/releases/latest"
 
 need() {
-  command -v "$1" >/dev/null 2>&1 || { echo "missing dependency: $1" >&2; exit 1; }
+  command -v "$1" >/dev/null 2>&1 || fail "missing dependency: $1"
 }
 
 need curl
@@ -18,8 +22,8 @@ url="$(
 )"
 
 if [[ -z "$url" || "$url" == "null" ]]; then
-  echo "No .flatpak asset found in latest release of ${REPO}" >&2
-  echo "Tip: open https://github.com/${REPO}/releases and check Assets." >&2
+  warn "No .flatpak asset found in latest release of ${REPO}"
+  warn "Tip: open https://github.com/${REPO}/releases and check Assets."
   exit 2
 fi
 
@@ -28,7 +32,7 @@ trap 'rm -rf "$tmp_dir"' EXIT
 
 file="$tmp_dir/$(basename "$url")"
 
-echo "Downloading: $url"
+info "Downloading: $url"
 curl -fL --retry 3 --retry-delay 1 -o "$file" "$url"
-echo "Done."
-echo "Saved to: $file"
+ok "Done."
+info "Saved to: $file"

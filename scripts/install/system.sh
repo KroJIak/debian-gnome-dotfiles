@@ -6,6 +6,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../lib/common.sh"
 
 log "[Stage 3] System"
+if [[ "${DOTFILES_SKIP_SYSTEM:-0}" -eq 1 ]]; then
+	warn "[Stage 3] System | Skipping"
+	return 0
+fi
 log "[Stage 3] System | Add images"
 bash "$REPO_ROOT/scripts/system/add-images.sh"
 log "[Stage 3] System | Apply configs"

@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=../../lib/common.sh
+source "$SCRIPT_DIR/../../lib/common.sh"
+
 # Add Docker's official GPG key:
 sudo apt update -y
 sudo apt install -y ca-certificates curl
@@ -18,9 +22,8 @@ sudo apt update -y
 sudo apt install -y \
   docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-read -r -p "Configure Docker registry mirrors? (y/N) " reply
-if [[ "$reply" =~ ^[Yy]$ ]]; then
-  echo "Note: In Russia after 2024, Docker Hub may be unavailable for pulls."
+if prompt_confirm "Configure Docker registry mirrors?"; then
+  warn "In Russia after 2024, Docker Hub may be unavailable for pulls."
   sudo mkdir -p /etc/docker
   sudo tee /etc/docker/daemon.json >/dev/null <<'JSON'
 {
