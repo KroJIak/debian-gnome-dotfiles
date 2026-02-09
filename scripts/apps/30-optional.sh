@@ -21,5 +21,6 @@ fi
 bash "$SCRIPT_DIR/extra/40-docker.sh"
 bash "$SCRIPT_DIR/extra/50-yandex-music.sh"
 bash "$SCRIPT_DIR/extra/55-vscode.sh"
+bash "$SCRIPT_DIR/extra/redvpn/install.sh" --quiet --skip-key-input
 bash "$SCRIPT_DIR/extra/75-tailscale.sh"
 bash "$SCRIPT_DIR/extra/80-arduino.sh"

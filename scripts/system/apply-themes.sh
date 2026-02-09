@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-git clone https://github.com/vinceliuice/Orchis-theme
-cd Orchis-theme
-bash install.sh --theme green --color dark --size standard
-gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Green-Dark'
-gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
-cd ..
-sudo rm -r Orchis-theme
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+THEMES_DIR="$SCRIPT_DIR/../../gtk-theme"
 
-# Doesn't work
-# sudo apt install -y libglib2.0-dev dconf-cli
-# git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
-# cd gdm-tools
-# sudo bash install.sh
-# set-gdm-theme backup update
-# set-gdm-theme set -b "$HOME/.gdm_background2K.png"
-# cd ..
-# sudo rm -r gdm-tools
+mkdir -p "$HOME/.themes"
+cp -r "$THEMES_DIR/Everforest-Dark-Medium-B-GS" "$HOME/.themes/"
+cp -r "$THEMES_DIR/Everforest-Green-Dark" "$HOME/.themes/"
+
+gsettings set org.gnome.desktop.interface gtk-theme 'Everforest-Green-Dark'
+gsettings set org.gnome.shell.extensions.user-theme name 'Everforest-Dark-Medium-B-GS'
+
+if command -v gnome-extensions >/dev/null 2>&1; then
+	if gnome-extensions info user-theme@gnome-shell-extensions.gcampax.github.com >/dev/null 2>&1; then
+		if ! gnome-extensions list --enabled | grep -q '^user-theme@gnome-shell-extensions.gcampax.github.com$'; then
+			echo "Warning: user-theme extension is installed but not enabled." >&2
+		fi
+	else
+		echo "Warning: user-theme extension is not installed; Shell theme may not apply." >&2
+	fi
+else
+	echo "Warning: gnome-extensions not found; cannot verify user-theme extension." >&2
+fi

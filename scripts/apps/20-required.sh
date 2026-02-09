@@ -15,3 +15,5 @@ sudo flatpak install -y flathub io.github.seadve.Kooha
 
 bash "$SCRIPT_DIR/extra/60-flameshot.sh"
 bash "$SCRIPT_DIR/extra/65-ipscan.sh"
+bash "$SCRIPT_DIR/extra/zsh/install.sh"
+bash "$SCRIPT_DIR/extra/tilix/install.sh"

@@ -62,3 +62,6 @@ gsettings set org.gnome.desktop.interface clock-show-seconds true
 
 # center new windows
 gsettings set org.gnome.mutter center-new-windows true
+
+# disable hotkeys for dash to dock
+gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false

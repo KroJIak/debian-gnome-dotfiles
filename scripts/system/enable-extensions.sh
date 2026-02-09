@@ -15,3 +15,4 @@ gnome-extensions enable quicksettings-audio-devices-hider@marcinjahn.com
 gnome-extensions enable tiling-assistant@leleat-on-github
 gnome-extensions enable top-bar-organizer@julian.gse.jsts.xyz
 gnome-extensions enable trayIconsReloaded@selfmade.pl
+gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com

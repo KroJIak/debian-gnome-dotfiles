@@ -1,0 +1,37 @@
+[/]
+auto-hide-mouse=false
+close-with-last-session=true
+focus-follow-mouse=false
+middle-click-close=false
+new-instance-mode='new-window'
+prompt-on-close=false
+prompt-on-close-process=false
+tab-position='top'
+terminal-title-style='none'
+theme-variant='system'
+unsafe-paste-alert=false
+warn-vte-config-issue=false
+window-save-state=false
+window-state=87040
+window-style='borderless'
+
+[keybindings]
+session-add-auto='<Primary><Shift>Return'
+session-close='disabled'
+terminal-close='<Primary><Shift>q'
+
+[profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
+background-color='#2A2A2D2D3434'
+background-transparency-percent=16
+badge-color='#AC7EA8'
+badge-color-set=false
+bold-color-set=false
+cursor-colors-set=false
+dim-transparency-percent=0
+font='FiraCode Nerd Font 12'
+foreground-color='#C8C8D3D3F5F5'
+highlight-colors-set=false
+palette=['#1B1D2B', '#FF757F', '#C3E88D', '#FFC777', '#8282AAAAFFFF', '#C099FF', '#86E1FC', '#828BB8', '#44444A4A7373', '#FF757F', '#C3E88D', '#FFC777', '#8282AAAAFFFF', '#C099FF', '#86E1FC', '#C8D3F5']
+use-system-font=false
+use-theme-colors=false
+visible-name='Default'
