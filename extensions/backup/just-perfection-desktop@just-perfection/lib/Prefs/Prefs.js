@@ -2,100 +2,229 @@
  * Prefs Library
  *
  * @author     Javad Rahmatzadeh <j.rahmatzadeh@gmail.com>
- * @copyright  2020-2023
+ * @copyright  2020-2026
  * @license    GPL-3.0-only
  */
 
 /**
  * prefs widget for showing prefs window
  */
-var Prefs = class
+export class Prefs
 {
+    /**
+     * Current shell version
+     *
+     * @type {number|null}
+     */
+    #shellVersion = null;
+
+    /**
+     * Instance of PrefsKeys
+     *
+     * @type {import('./PrefsKeys.js').PrefsKeys|null}
+     */
+    #prefsKeys = null;
+
+    /**
+     * Instance of Gtk.Builder
+     *
+     * @type {Gtk.Builder|null}
+     */
+    #builder = null;
+
+    /**
+     * Instance of Gio.Settings
+     *
+     * @type {Settings|null}
+     */
+    #settings = null;
+
+    /**
+     * Instance of Gtk.CssProvider
+     *
+     * @type {Gtk.CssProvider|null}
+     */
+    #cssProvider = null;
+
+    /**
+     * Instance of Resource
+     *
+     * @type {Gio.Resource|null}
+     */
+    #resource = null;
+
+    /**
+     * Instance of Adw
+     *
+     * @type {Adw|null}
+     */
+    #adw = null;
+
+    /**
+     * Instance of Gtk
+     *
+     * @type {Gtk|null}
+     */
+    #gtk = null;
+
+    /**
+     * Instance of Gdk
+     *
+     * @type {Gdk|null}
+     */
+    #gdk = null;
+
+    /**
+     * Instance of Gio
+     *
+     * @type {Gio|null}
+     */
+    #gio = null;
+
+    /**
+     * Instance of GLib
+     *
+     * @type {GLib|null}
+     */
+    #glib = null;
+
+    /**
+     * All available profile names
+     *
+     * @type {Array}
+     */
+    #profiles = [
+        'default',
+        'minimal',
+        'superminimal',
+    ];
+
+    /**
+     * All available crypto addresses for donation
+     *
+     * The order should be the same as what we have in the combobox .ui file
+     *
+     * @type {Array}
+     */
+    #cryptoAddresses = [
+        ['Dogecoin', 'DULPjoiDuhZCmv5LDeJuqYPC8Uy7NK7DnW'],
+        ['Bitcoin', 'bc1qn6p0k8sapmxgedn8qjhd5gm2yzy46t5s296lnd'],
+        ['Bitcoin Cash', 'qzhuj2kdw4zjrg8r2j7knx5uzqdcpv5lwv5uxq04e0'],
+        ['Ethereum', '0xE4A6C46E1095C49688645c132672cB04d1402026'],
+        ['XRP', 'rEneFYpbFmTB7ejLphTwjsj8ityezR1NeY'],
+        ['USDT', '0xE4A6C46E1095C49688645c132672cB04d1402026'],
+        ['USDC', '0xE4A6C46E1095C49688645c132672cB04d1402026'],
+        ['Solana', '3M9d8arcHiuqAwso9zTX4pvZRoaeVVomkovWmGCYgDG2'],
+        ['Cardano', 'addr1qxgrpcsdpyuh7dl4m2mk2vpuss68zjze9y83wpsuxjyafg5sxr3q6zfe0umltk4hv5crepp5w9y9j2g0zurpcdyf6j3qeu2hqs'],
+        ['BNB', '0xE4A6C46E1095C49688645c132672cB04d1402026'],
+        ['LTC', 'LVz4se3wepdgCNGkE8V53VB47ViAjZb7F1'],
+        ['XLM', 'GDZOVYXD6PGG77V5HGHN767AGPIYZ3ZHNUC53BSXMIDRSTKVFVUJJFHZ'],
+        ['Monero', '49uPJDZCoFJMoeLAZKDpuTScHjdfgfzksMNurZdt2J4x8meKUZZwUiq3tBs9xYVq9G8PzxjwH6zkXeEZKz3JgdfiGo3aZN5'],
+        ['LBRY', 'bPMi1WVgtMDjdX3V4ofAtMt5qMj4xYM4A1'],
+        ['Shiba Inu', '0xE4A6C46E1095C49688645c132672cB04d1402026'],
+    ];
+
     /**
      * class constructor
      *
      * @param {Object} dependencies
-     *   'Builder' instance of Gtk::Builder
-     *   'Settings' instance of Gio::Settings
+     *   'Builder' instance of Gtk.Builder
+     *   'Settings' instance of Gio.Settings
+     *   'CssProvider': instance of Gtk.CssProvider
+     *   'Adw' reference to Adw
      *   'Gtk' reference to Gtk
      *   'Gdk' reference to Gdk
      *   'Gio' reference to Gio
      *   'GLib' reference to GLib
-     * @param {PrefsKeys.PrefsKeys} prefsKeys instance of PrefsKeys
-     * @param {number} shellVersion float in major.minor format
+     * @param {PrefsKeys.PrefsKeys} prefsKeys - instance of PrefsKeys
+     * @param {number} shellVersion - float in major.minor format
      */
     constructor(dependencies, prefsKeys, shellVersion)
     {
-        this._settings = dependencies['Settings'] || null;
-        this._builder = dependencies['Builder'] || null;
-        this._gtk = dependencies['Gtk'] || null;
-        this._gdk = dependencies['Gdk'] || null;
-        this._gio = dependencies['Gio'] || null;
-        this._glib = dependencies['GLib'] || null;
+        this.#settings = dependencies['Settings'] || null;
+        this.#builder = dependencies['Builder'] || null;
+        this.#cssProvider = dependencies['CssProvider'] || null;
+        this.#adw = dependencies['Adw'] || null;
+        this.#gtk = dependencies['Gtk'] || null;
+        this.#gdk = dependencies['Gdk'] || null;
+        this.#gio = dependencies['Gio'] || null;
+        this.#glib = dependencies['GLib'] || null;
 
-        this._prefsKeys = prefsKeys;
-        this._shellVersion = shellVersion;
-
-        /**
-         * holds all profile names
-         *
-         * @member {string}
-         */
-        this._profiles = [
-            'default',
-            'minimal',
-            'superminimal',
-        ];
-
-        /**
-         * holds all required urls
-         *
-         * @member {Object}
-         */
-        this._url = {
-            bug_report: 'https://gitlab.gnome.org/jrahmatzadeh/just-perfection/-/issues',
-            patreon: 'https://www.patreon.com/justperfection',
-        };
+        this.#prefsKeys = prefsKeys;
+        this.#shellVersion = shellVersion;
     }
 
     /**
      * fill prefs window
      *
-     * @param {string} UIFolderPath folder path to ui folder
+     * @param {Adw.PreferencesWindow} window prefs dialog
+     * @param {string} ResourcesFolderPath folder path to resources folder
      * @param {string} gettextDomain gettext domain
      *
      * @returns {void}
      */
-     fillPrefsWindow(window, UIFolderPath, gettextDomain)
+     fillPrefsWindow(window, ResourcesFolderPath, gettextDomain)
      {
-         // changing the order here can change the elements order in ui 
+         // changing the order here can change the elements order in ui
          let uiFilenames = [
-             'profile',
-             'visibility',
-             'icons',
-             'behavior',
-             'customize',
+             'menu',
+             'pages/profile',
+             'pages/visibility',
+             'pages/behavior',
+             'pages/customize',
          ];
- 
-         this._builder.set_translation_domain(gettextDomain);
+
+         this.#loadResource(ResourcesFolderPath);
+
+         this.#cssProvider.load_from_resource(
+            `/org/gnome/Shell/Extensions/justperfection/css/prefs.css`
+         );
+         this.#gtk.StyleContext.add_provider_for_display(
+            this.#gdk.Display.get_default(),
+            this.#cssProvider,
+            this.#gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+         );
+
+         this.#builder.set_translation_domain(gettextDomain);
          for (let uiFilename of uiFilenames) {
-             this._builder.add_from_file(`${UIFolderPath}/adw/${uiFilename}.ui`);
+            this.#builder.add_from_resource(
+                `/org/gnome/Shell/Extensions/justperfection/ui/${uiFilename}.ui`
+            );
          }
 
          for (let uiFilename of uiFilenames) {
-             let page = this._builder.get_object(uiFilename);
+             if (!uiFilename.startsWith('pages/')) {
+                 continue;
+             }
+             let page = this.#builder.get_object(uiFilename.replace('pages/', ''));
              window.add(page);
          }
- 
-         this._setValues();
-         this._guessProfile();
-         this._onlyShowSupportedRows();
-         this._registerAllSignals(window);
 
-         this._setWindowSize(window);
+         this.#addMainMenu(window);
+         this.#setValues();
+         this.#guessProfile();
+         this.#onlyShowSupportedRows();
+         this.#loadCryptoSupportAddress();
+         this.#registerAllSignals(window);
+         this.#registerAllActions(window);
+
+         this.#setWindowSize(window);
 
          window.search_enabled = true;
      }
+
+    /**
+     * load resource
+     *
+     * @param {string} folder path to the resources folder
+     *
+     * @returns {void}
+     */
+    #loadResource(path)
+    {
+        this.#resource = this.#gio.Resource.load(`${path}/resources.gresource`);
+        this.#gio.resources_register(this.#resource);
+    }
 
     /**
      * set window size
@@ -104,12 +233,12 @@ var Prefs = class
      *
      * @returns {void}
      */
-    _setWindowSize(window)
+    #setWindowSize(window)
     {
-        let [pmWidth, pmHeight, pmScale] = this._getPrimaryMonitorInfo();
+        let [pmWidth, pmHeight, pmScale] = this.#getPrimaryMonitorInfo();
         let sizeTolerance = 50;
-        let width = 600;
-        let height = 650;
+        let width = 640;
+        let height = 750;
 
         if (
             (pmWidth / pmScale) - sizeTolerance >= width &&
@@ -124,9 +253,9 @@ var Prefs = class
      *
      * @returns {Array} [width, height, scale]
      */
-    _getPrimaryMonitorInfo()
+    #getPrimaryMonitorInfo()
     {
-        let display = this._gdk.Display.get_default();
+        let display = this.#gdk.Display.get_default();
 
         let pm = display.get_monitors().get_item(0);
 
@@ -140,6 +269,88 @@ var Prefs = class
         return [geo.width, geo.height, scale];
     }
 
+     /**
+      * get header bar widget
+      *
+      * @param {Gtk.Widget} parent the widget that may contain the header bar
+      *
+      * @returns {void}
+      */
+     #getHeaderBar(parent)
+     {
+        const children = parent.observe_children();
+
+        if (!children) {
+            return null;
+        }
+
+        for (let i = 0; i < children.get_n_items(); i++) {
+            const child = children.get_item(i);
+            if (child instanceof this.#adw.HeaderBar) {
+                return child;
+            }
+            const widget = this.#getHeaderBar(child);
+            if (widget) {
+                return widget;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * add main menu to the header bar
+     *
+     * @param {Adw.PreferencesWindow} window prefs dialog
+     *
+     * @returns {void}
+     */
+    #addMainMenu(window)
+    {
+        let headerBar = this.#getHeaderBar(window);
+
+        headerBar?.pack_end(this.#builder.get_object('menu_button'));
+    }
+
+    /**
+     * register all actions
+     *
+     * @param {Adw.PreferencesWindow} window prefs dialog
+     *
+     * @returns {void}
+     */
+    #registerAllActions(window)
+    {
+        this.#registerLinksActions(window);
+    }
+
+    /**
+     * register links action
+     *
+     * @param {Adw.PreferencesWindow} window prefs dialog
+     *
+     * @returns {void}
+     */
+    #registerLinksActions(window)
+    {
+        let group = new this.#gio.SimpleActionGroup();
+        window.insert_action_group('links', group);
+
+        let openUriAction = new this.#gio.SimpleAction({
+            name: 'open-uri',
+            parameter_type: new this.#glib.VariantType('s'),
+        });
+        openUriAction.connect(
+            'activate',
+            (_self, target) => {
+                const uri = target.get_string()[0];
+                this.#gio.AppInfo.launch_default_for_uri(uri, null);
+            }
+        );
+
+        group.add_action(openUriAction);
+    }
+
     /**
      * register all signals
      *
@@ -147,11 +358,28 @@ var Prefs = class
      *
      * @returns {void}
      */
-    _registerAllSignals(window)
+    #registerAllSignals(window)
     {
-        this._registerKeySignals();
-        this._registerFileChooserSignals(window);
-        this._registerProfileSignals();
+        this.#registerKeySignals();
+        this.#registerProfileSignals();
+        this.#registerCryptoSupportSignals(window);
+        this.#registerCloseSignal(window);
+    }
+
+    /**
+     * register close signal
+     *
+     * @param {Adw.PreferencesWindow} window prefs dialog
+     *
+     * @returns {void}
+     */
+    #registerCloseSignal(window)
+    {
+        window.connect('close-request', () => {
+            if (this.#resource) {
+                this.#gio.resources_unregister(this.#resource);
+            }
+        });
     }
 
     /**
@@ -159,85 +387,38 @@ var Prefs = class
      *
      * @returns {void}
      */
-     _registerKeySignals()
-     {
-         // all available keys
-         for (let [, key] of Object.entries(this._prefsKeys.keys)) {
- 
-             switch (key.widgetType) {
- 
-                 case 'GtkSwitch':
-                     this._builder.get_object(key.widgetId).connect('state-set', (w) => {
-                         this._settings.set_boolean(key.name, w.get_active());
-                         this._guessProfile();
-                     });
-                     break;
- 
-                 case 'AdwActionRow':
-                     this._builder.get_object(key.widgetId).connect('notify::selected-item', (w) => {
-                         let index = w.get_selected();
-                         let value = (index in key.maps) ? key.maps[index] : index; 
-                         this._settings.set_int(key.name, value);
-                         this._guessProfile();
-                     });
-                     break;
- 
-                 case 'GtkEntry':
-                     this._builder.get_object(key.widgetId).connect('changed', (w) => {
-                         this._settings.set_string(key.name, w.text);
-                         this._guessProfile();
-                     });
-                     break;
-             }
-         }
-    }
+    #registerKeySignals()
+    {
+        // all available keys
+        for (let [, key] of Object.entries(this.#prefsKeys.keys)) {
 
-    /**
-     * register file chooser signals
-     *
-     * @param {Adw.PreferencesWindow} window prefs dialog
-     *
-     * @returns {void}
-     */
-     _registerFileChooserSignals(window)
-     {
-         let fileChooser = this._builder.get_object('file_chooser');
-         let activitiesButtonIconPath = {
-             button: this._builder.get_object('activities_button_icon_path_button'),
-             entry: this._builder.get_object('activities_button_icon_path_entry'),
-             empty: this._builder.get_object('activities_button_icon_path_empty_button'),
-         };
- 
-         activitiesButtonIconPath['entry'].connect('changed', (w) => {
-             this._setFileChooserValue('activities_button_icon_path', w.text, true);
-         });
- 
-         activitiesButtonIconPath['empty'].connect('clicked', () => {
-             this._setFileChooserValue('activities_button_icon_path', '');
-         });
- 
-         activitiesButtonIconPath['button'].connect('clicked', (w) => {
-             this.currentFileChooserEntry = activitiesButtonIconPath['entry'];
- 
-             let uri = activitiesButtonIconPath['entry'].text;
-             let file = this._gio.File.new_for_uri(uri);
-             let fileExists = file.query_exists(null);
-             if (fileExists) {
-                 let fileParent = file.get_parent();
-                 fileChooser.set_current_folder(fileParent);
-             }
- 
-             fileChooser.set_transient_for(window);
-             fileChooser.show();
-         });
- 
-         fileChooser.connect('response', (w, response) => {
-             if (response !== this._gtk.ResponseType.ACCEPT) {
-                 return;
-             }
-             let fileURI = w.get_file().get_uri();
-             this.currentFileChooserEntry.text = fileURI;
-         });
+            switch (key.widgetType) {
+
+                case 'GtkSwitch':
+                    this.#builder.get_object(key.widgetId).connect('state-set', (w) => {
+                        this.#settings.set_boolean(key.name, w.get_active());
+                        this.#guessProfile();
+                    });
+                    break;
+
+                case 'AdwActionRow':
+                    this.#builder.get_object(key.widgetId).connect('notify::selected-item', (w) => {
+                        let index = w.get_selected();
+                        let value = (index in key.maps) ? key.maps[index] : index;
+                        this.#settings.set_int(key.name, value);
+                        this.#guessProfile();
+                    });
+                    break;
+
+                case 'AdwSpinRow':
+                    this.#builder.get_object(key.widgetId).connect('notify::value', (w) => {
+                        let value = w.get_value();
+                        this.#settings.set_int(key.name, value);
+                        this.#guessProfile();
+                    });
+                    break;
+            }
+        }
     }
 
     /**
@@ -245,30 +426,67 @@ var Prefs = class
      *
      * @returns {void}
      */
-    _registerProfileSignals()
+    #registerProfileSignals()
     {
-        for (let profile of this._profiles) {
-            let widget = this._builder.get_object(`profile_${profile}`);
+        for (let profile of this.#profiles) {
+            let widget = this.#builder.get_object(`profile_${profile}`);
             if (!widget) {
                 break;
             }
             widget.connect('clicked', (w) => {
-                this._setValues(profile);
+                this.#setValues(profile);
             });
         }
     }
 
     /**
-     * open uri
+     * register crypto support signals
      *
-     * @param {string} uri uri to open
      * @param {Adw.PreferencesWindow} window prefs dialog
      *
      * @returns {void}
      */
-    _openURI(window, uri)
+    #registerCryptoSupportSignals(window)
     {
-        this._gtk.show_uri(window, uri, this._gdk.CURRENT_TIME);
+        let comboRow = this.#builder.get_object(`support_crypto_row`);
+        let copyButton = this.#builder.get_object(`crypto_address_copy_button`);
+        let addressEntry = this.#builder.get_object(`crypto_address_row`);
+        let toast = this.#builder.get_object(`toast_added_to_clipboard`);
+
+        comboRow.connect('notify::selected-item', (w) => {
+            let selectedIndex = w.get_selected();
+            this.#loadCryptoSupportAddress(selectedIndex);
+        });
+
+        copyButton.connect('clicked', () => {
+            let display = this.#gdk.Display.get_default();
+            let clipboard = display.get_clipboard();
+            clipboard.set(addressEntry.text);
+            window.add_toast(toast);
+        });
+    }
+
+    /**
+     * load crypto address into the ui
+     *
+     * @param {number} index coming from the crypto name combobox
+     *
+     * @returns {void}
+     */
+    #loadCryptoSupportAddress(index = 0)
+    {
+        let addressEntry = this.#builder.get_object(`crypto_address_row`);
+        let qrPicture = this.#builder.get_object(`qr_picture`);
+
+        let name = this.#cryptoAddresses[index][0];
+        let filename = name.replace(' ', '-').toLowerCase();
+        let address = this.#cryptoAddresses[index][1]
+
+        qrPicture.set_resource(
+            `/org/gnome/Shell/Extensions/justperfection/imgs/qr-${filename}.svg`
+        );
+        addressEntry.title = `${name} Address`;
+        addressEntry.text = address;
     }
 
     /**
@@ -276,17 +494,17 @@ var Prefs = class
      *
      * @returns {void}
      */
-    _guessProfile()
+    #guessProfile()
     {
         let totalCount = 0;
         let matchCount = {};
 
-        for (let profile of this._profiles) {
+        for (let profile of this.#profiles) {
             matchCount[profile] = 0;
         }
 
-        for (let [, key] of Object.entries(this._prefsKeys.keys)) {
-        
+        for (let [, key] of Object.entries(this.#prefsKeys.keys)) {
+
             if (!key.supported) {
                 continue;
             }
@@ -295,20 +513,20 @@ var Prefs = class
 
             switch (key.widgetType) {
                 case 'GtkSwitch':
-                    value = this._builder.get_object(key.widgetId).get_active();
+                    value = this.#builder.get_object(key.widgetId).get_active();
                     break;
                 case 'AdwActionRow':
-                    value = this._builder.get_object(key.widgetId).get_selected();
+                    value = this.#builder.get_object(key.widgetId).get_selected();
                     break;
-                case 'GtkEntry':
-                    value = this._builder.get_object(key.widgetId).text;
+                case 'AdwSpinRow':
+                    value = this.#builder.get_object(key.widgetId).get_value();
                     break;
                 default:
                     value = '';
                     continue;
             }
-            
-            for (let profile of this._profiles) {
+
+            for (let profile of this.#profiles) {
                 if (key.profiles[profile] === value) {
                     matchCount[profile]++;
                 }
@@ -318,56 +536,16 @@ var Prefs = class
         }
 
         let currentProfile = 'custom';
-        for (let profile of this._profiles) {
+        for (let profile of this.#profiles) {
             if (matchCount[profile] === totalCount) {
                 currentProfile = profile;
                 break;
             }
         }
-        
-        let widget = this._builder.get_object(`profile_${currentProfile}`);
+
+        let widget = this.#builder.get_object(`profile_${currentProfile}`);
         if (widget) {
             widget.set_active(true);
-        }
-    }
-
-    /**
-     * set file chooser button value
-     *
-     * @param {string} id element starter id
-     * @param {string} uri file address
-     * @param {bool} entrySetBefore whether file chooser entry value has been set before
-     *
-     * @returns {void}
-     */
-    _setFileChooserValue(id, uri, entrySetBefore = false)
-    {
-        let preview = this._builder.get_object(`${id}_preview`);
-        let emptyButton = this._builder.get_object(`${id}_empty_button`);
-        let entry = this._builder.get_object(`${id}_entry`);
-
-        if (!entry) {
-            return;
-        }
-
-        let file = this._gio.File.new_for_uri(uri);
-        let fileExists = file.query_exists(null);
-        let uriPrepared = (fileExists) ? uri : '';
-
-        let visible = uriPrepared !== '';
-
-        if (!entrySetBefore) {
-            entry.text = uriPrepared;
-        }
-        emptyButton.visible = visible;
-
-        preview.clear();
-
-        if (fileExists) {
-            let gicon = this._gio.icon_new_for_string(file.get_path());
-            preview.set_from_gicon(gicon);
-        } else {
-            preview.icon_name = 'document-open-symbolic';
         }
     }
 
@@ -378,19 +556,21 @@ var Prefs = class
      *
      * @returns {void}
      */
-    _setValues(profile)
+    #setValues(profile)
     {
-        for (let [, key] of Object.entries(this._prefsKeys.keys)) {
+        for (let [, key] of Object.entries(this.#prefsKeys.keys)) {
 
-            let widget = this._builder.get_object(key.widgetId);
+            let widget = this.#builder.get_object(key.widgetId);
+
+            let value;
 
             switch (key.widgetType) {
 
                 case 'GtkSwitch':
-                    let value
+                    value
                     = (profile)
                     ? key.profiles[profile]
-                    : this._settings.get_boolean(key.name);
+                    : this.#settings.get_boolean(key.name);
 
                     widget.set_active(value);
                     break;
@@ -399,7 +579,7 @@ var Prefs = class
                     let index
                     = (profile)
                     ? key.profiles[profile]
-                    : this._settings.get_int(key.name);
+                    : this.#settings.get_int(key.name);
 
                     for (let k in key.maps) {
                         if (key.maps[k] === index) {
@@ -410,14 +590,13 @@ var Prefs = class
                     widget.set_selected(index);
                     break;
 
-                case 'GtkEntry':
-                    let text
+                case 'AdwSpinRow':
+                    value
                     = (profile)
                     ? key.profiles[profile]
-                    : this._settings.get_string(key.name);
+                    : this.#settings.get_int(key.name);
 
-                    widget.text = text;
-                    this._setFileChooserValue(key.id, widget.text);
+                    widget.set_value(value);
                     break;
             }
         }
@@ -428,13 +607,12 @@ var Prefs = class
      *
      * @returns {void}
      */
-     _onlyShowSupportedRows()
+     #onlyShowSupportedRows()
      {
-         for (let [, key] of Object.entries(this._prefsKeys.keys)) {
-            let row = this._builder.get_object(`${key.id}_row`);
+         for (let [, key] of Object.entries(this.#prefsKeys.keys)) {
+            let row = this.#builder.get_object(`${key.id}_row`);
             let visible = key.supported;
             row.visible = visible;
         }
      }
 };
-

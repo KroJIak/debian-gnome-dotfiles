@@ -47,12 +47,12 @@ Next, select the following options:
 #### Configure the network
 - Auto-configure networking?: `Yes`
 - Just click `Continue`
-- Hostname: change it to what you want (for example, `"andrey-huawei"`)
+- Hostname: change it to what you want (for example, `"my-host"`)
 - Domain name: `Continue`
 #### Set up users and passwords
 - Allow login as root?: `No`
 - Full name for the new user: you can just skip
-- Username for your account: preferably in small letters (it will be more convenient, for example, `"andrey-debian"`)
+- Username for your account: preferably in small letters (it will be more convenient, for example, `"my-user"`)
 - Choose a password for the new user: Just a password
 #### Configure the clock
 - Set the clock using NTP?: `Yes`

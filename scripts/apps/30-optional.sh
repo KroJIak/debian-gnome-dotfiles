@@ -5,12 +5,12 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install -y qbittorrent
+sudo apt install -y czkawka
+sudo apt install -y pdfarranger
 sudo snap install intellij-idea-ultimate --classic
 sudo snap install code --classic
 sudo snap install obsidian --classic
 sudo snap install discord
-sudo snap install arduino
-sudo usermod -a -G dialout "$USER"
 
 read -r -p "Install Ayugram Desktop instead of Telegram Desktop? (y/N) " reply
 if [[ "$reply" =~ ^[Yy]$ ]]; then
@@ -21,3 +21,4 @@ fi
 
 bash "$SCRIPT_DIR/extra/40-docker.sh"
 bash "$SCRIPT_DIR/extra/50-yandex-music.sh"
+bash "$SCRIPT_DIR/extra/80-arduino.sh"

@@ -3,7 +3,17 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-rm -rf "$HOME/Desktop" "$HOME/Music" "$HOME/Pictures" "$HOME/Public" "$HOME/Templates" "$HOME/Videos"
+for name in Desktop Music Pictures Public Templates Videos; do
+	dir="$HOME/$name"
+	if [ -d "$dir" ]; then
+		if [ -z "$(ls -A "$dir")" ]; then
+			rmdir "$dir"
+		else
+			mv "$dir" "$HOME/${name}.bak"
+		fi
+	fi
+done
+
 mkdir -p "$HOME/Media"
 
 mkdir -p "$HOME/.config"

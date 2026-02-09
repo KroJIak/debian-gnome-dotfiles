@@ -1,0 +1,4 @@
+"logout" "<Super>K"
+"screenshot" ""
+"area-screenshot" ""
+"window-screenshot" ""

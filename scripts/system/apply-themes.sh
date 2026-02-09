@@ -9,11 +9,12 @@ gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
 cd ..
 sudo rm -r Orchis-theme
 
-sudo apt install -y libglib2.0-dev dconf-cli
-git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
-cd gdm-tools
-sudo bash install.sh
-set-gdm-theme backup update
-set-gdm-theme set -b "$HOME/.gdm_background2K.png"
-cd ..
-sudo rm -r gdm-tools
+# Doesn't work
+# sudo apt install -y libglib2.0-dev dconf-cli
+# git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
+# cd gdm-tools
+# sudo bash install.sh
+# set-gdm-theme backup update
+# set-gdm-theme set -b "$HOME/.gdm_background2K.png"
+# cd ..
+# sudo rm -r gdm-tools

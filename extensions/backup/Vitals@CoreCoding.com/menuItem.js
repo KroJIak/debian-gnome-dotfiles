@@ -1,9 +1,9 @@
-const St = imports.gi.St;
-const PopupMenu = imports.ui.popupMenu;
-const GObject = imports.gi.GObject;
-const Clutter = imports.gi.Clutter;
+import Clutter from 'gi://Clutter';
+import GObject from 'gi://GObject';
+import St from 'gi://St'
+import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
-var MenuItem = GObject.registerClass({
+export const MenuItem = GObject.registerClass({
 
     Signals: {
         'toggle': { param_types: [Clutter.Event.$gtype] },
@@ -21,18 +21,18 @@ var MenuItem = GObject.registerClass({
         this._gIcon = icon;
 
         // add icon
-        this.add(new St.Icon({ style_class: 'popup-menu-icon', gicon : this._gIcon }));
+        this.add_child(new St.Icon({ style_class: 'popup-menu-icon', gicon : this._gIcon }));
 
         // add label
         this._labelActor = new St.Label({ text: label });
-        this.add(this._labelActor);
+        this.add_child(this._labelActor);
 
         // add value
         this._valueLabel = new St.Label({ text: value });
         this._valueLabel.set_x_align(Clutter.ActorAlign.END);
         this._valueLabel.set_x_expand(true);
         this._valueLabel.set_y_expand(true);
-        this.add(this._valueLabel);
+        this.add_child(this._valueLabel);
 
         this.actor._delegate = this;
     }

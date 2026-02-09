@@ -3,38 +3,6 @@
     font-size: small;
 }
 
-.just-perfection .workspace-animation
-{
-    background-color: black;
-}
-
-.just-perfection .window-clone-border
-{
-    border: 5px solid #004AC7;
-    border-radius: 16px;
-    box-shadow: inset 0 0 0 0 #004AC7;
-}
-
-.just-perfection .window-caption
-{
-    color: #ffffff;
-    background-color: #004AC7;
-    font-size: small;
-    font-weight: normal;
-}
-  
-.just-perfection .window-close
-{
-    background-image: url("bin/close-button.svg");
-    background-size: 24px;
-    height: 24px;
-    width: 24px;
-    background-color: transparent;
-    color: transparent;
-    border-radius: 24px;
-    border: 0 solid #1b6acb;
-}
-
 .just-perfection .switcher-popup
 {
     padding: 8px;
@@ -57,6 +25,7 @@
     padding: 8px;
     border-radius: 14px;
     border: 1px solid transparent;
+    background-color: transparent;
 }
 
 .just-perfection .switcher-list .item-box:outlined
@@ -176,58 +145,28 @@
     height: 22px;
 }
 
-.just-perfection .search-entry
-{
-    caret-color: white;
-    selection-background-color: #008bff;
-    selected-color: white;
-    padding: 10px;
-    color: white;
-    background-color: rgba(0, 0, 0, .5);
-    border: 0;
-    border-radius: 10px;
-    box-shadow: none;
-}
-
-.just-perfection .search-entry:focus
-{
-    background-color: rgba(0, 0, 0, .6);
-}
-
-.just-perfection .search-entry .search-entry-icon
-{
-    icon-size: 18px;
-    padding: 0 0;
-    color: rgba(255, 255, 255, .5);
-}
-
-.just-perfection .search-section .search-section-separator
-{
-    height: 1px;
-    background-color: rgba(255, 255, 255, .1);
-}
-
-.just-perfection .search-section-content
-{
-    spacing: 0;
-    border-radius: 0;
-    border: 0;
-    box-shadow: none;
-    background: none;
-    text-shadow: none;
-    color: rgba(255, 255, 255, .98);
-}
-
-.just-perfection .dash-background
-{
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
 .just-perfection .tile-preview
 {
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.6);
     border-radius: 0;
+}
+
+.just-perfection-api-accent-color-icon StIcon
+{
+    color: -st-accent-color;
+}
+
+.just-perfection-api-accent-color-icon #panelActivities .workspace-dot
+{
+    background-color: -st-accent-color;
+}
+
+.just-perfection-api-accent-color-icon .quick-toggle-menu .icon.active,
+.just-perfection-api-accent-color-icon .quick-toggle:checked StIcon,
+.just-perfection-api-accent-color-icon .quick-menu-toggle .quick-toggle-arrow:checked StIcon
+{
+    color: -st-accent-fg-color;
 }
 
 .just-perfection-api-no-search #overview
@@ -290,44 +229,12 @@
     spacing: 0;
 }
 
-.just-perfection-api-no-app-menu-icon .app-menu-icon
-{
-    width: 0;
-    height: 0;
-    margin: 0;
-}
-
 .just-perfection-api-no-show-apps-button .show-apps,
 .just-perfection-api-no-show-apps-button .show-apps StIcon
 {
     width: 0;
     margin: 0;
     spacing: 0;
-}
-
-.just-perfection-api-activities-button-icon,
-.just-perfection-api-activities-button-icon-monochrome
-{
-    /* commented because padding would be enough since we are only using */
-    /* one element inside the box */
-    /* -natural-hpadding: 6px; */
-    /* -minimum-hpadding: 6px; */
-    padding-right: 6px;
-    padding-left: 0;
-}
-
-.just-perfection-api-activities-button-icon-monochrome
-{
-    -st-icon-style: symbolic;
-}
-
-.just-perfection-api-activities-button-no-label .just-perfection-api-activities-button-icon,
-.just-perfection-api-activities-button-no-label .just-perfection-api-activities-button-icon-monochrome
-{
-    -natural-hpadding: 0;
-    -minimum-hpadding: 0;
-    padding-right: 0;
-    padding-left: 0;
 }
 
 .just-perfection-api-dash-icon-size16 #dash StIcon { height: 16px; width: 16px; }
@@ -569,8 +476,6 @@
 
 .just-perfection-api-no-weather .weather-button,
 .just-perfection-api-no-weather .weather-button *,
-.just-perfection-api-no-world-clocks .world-clocks-button,
-.just-perfection-api-no-world-clocks .world-clocks-button *,
 .just-perfection-api-no-events-button .events-button,
 .just-perfection-api-no-events-button .events-button *,
 .just-perfection-api-no-screen-sharing-indicator .screen-sharing-indicator,
@@ -803,8 +708,8 @@
 .just-perfection-api-osd-position-bottom .osd-window { margin: 4em 3em; }
 
 .just-perfection-api-no-dash-separator .dash-separator,
-.just-perfection-api-no-app-menu-label #appMenu StLabel,
-.just-perfection-api-no-dash-app-running-dot #dash .app-well-app-running-dot
+.just-perfection-api-no-dash-app-running-dot #dash .app-well-app-running-dot,
+.just-perfection-api-no-dash-app-running-dot #dash .app-grid-running-dot
 {
     width: 0;
     height: 0;
@@ -817,4 +722,11 @@
 {
     background-color: transparent;
     box-shadow: 0 4px 16px 4px transparent;
+}
+
+.just-perfection-api-no-power-icon .power-status StIcon
+{
+    width: 0;
+    height: 0;
+    padding: 0;
 }

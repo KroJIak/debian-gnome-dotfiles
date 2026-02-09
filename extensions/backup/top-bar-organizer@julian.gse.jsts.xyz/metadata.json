@@ -4,11 +4,13 @@
   "name": "Top Bar Organizer",
   "settings-schema": "org.gnome.shell.extensions.top-bar-organizer",
   "shell-version": [
-    "42",
-    "43",
-    "44"
+    "45",
+    "46",
+    "47",
+    "48",
+    "49"
   ],
-  "url": "https://gitlab.gnome.org/julianschacher/top-bar-organizer",
+  "url": "https://gitlab.gnome.org/june/top-bar-organizer",
   "uuid": "top-bar-organizer@julian.gse.jsts.xyz",
-  "version": 9
+  "version": 15
 }

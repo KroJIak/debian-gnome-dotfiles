@@ -1,16 +1,19 @@
-const { GObject, Clutter, St, GLib } = imports.gi;
-const { panelMenu, popupMenu } = imports.ui;
-const { getCurrentExtension } = imports.misc.extensionUtils;
-const AppManager = getCurrentExtension().imports.AppManager;
+import GObject from 'gi://GObject';
+import Clutter from 'gi://Clutter';
+import St from 'gi://St';
+import GLib from 'gi://GLib';
+import * as panelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+import * as popupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+import * as AppManager from './AppManager.js';
 
-var TrayIndicator = GObject.registerClass(
+export const TrayIndicator = GObject.registerClass(
 	class TrayIndicator extends panelMenu.Button {
-		_init(settings) {
+		_init(extension) {
 			this._icons = [];
 
 			super._init(0.0, null, false);
-			this._settings = settings;
-			this._appManager = new AppManager.AppManager(this._settings);
+			this._settings = extension._settings;
+			this._appManager = new AppManager.AppManager(extension);
 			this._overflow = false;
 
 			this._indicators = new St.BoxLayout();
@@ -96,7 +99,7 @@ var TrayIndicator = GObject.registerClass(
 			this._icons.push(icon);
 
 			if (this._overflow) {
-				this._menuItem.actor.add(button);
+				this._menuItem.add_child(button);
 			} else {
 				this._indicators.insert_child_at_index(button, 0);
 			}
@@ -114,7 +117,7 @@ var TrayIndicator = GObject.registerClass(
 			}
 			
 			const actor = icon.get_parent();
-			actor.remove_actor(icon);
+			actor.remove_child(icon);
 			actor.destroy();
 
 			if (!ignoreCheckOverflow) {

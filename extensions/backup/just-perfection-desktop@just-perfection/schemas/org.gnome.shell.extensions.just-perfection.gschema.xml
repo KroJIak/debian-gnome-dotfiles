@@ -64,24 +64,6 @@
       <description>Activities Button Visibility Status</description>
     </key>
 
-    <key type="b" name="app-menu">
-      <default>true</default>
-      <summary>App Menu</summary>
-      <description>App Menu Visibility Status</description>
-    </key>
-
-    <key type="b" name="app-menu-icon">
-      <default>true</default>
-      <summary>App Menu Icon</summary>
-      <description>App Menu Icon Visibility Status</description>
-    </key>
-
-    <key type="b" name="app-menu-label">
-      <default>true</default>
-      <summary>App Menu Label</summary>
-      <description>App Menu Label Visibility Status</description>
-    </key>
-
     <key type="b" name="clock-menu">
       <default>true</default>
       <summary>Clock Menu</summary>
@@ -104,12 +86,6 @@
       <default>true</default>
       <summary>Accessibility Menu</summary>
       <description>Accessibility Menu Visibility Status</description>
-    </key>
-
-    <key type="b" name="aggregate-menu">
-      <default>true</default>
-      <summary>Aggregate Menu</summary>
-      <description>Aggregate Menu Visibility Status</description>
     </key>
 
     <key type="b" name="quick-settings">
@@ -179,33 +155,21 @@
 
     <key type="i" name="animation">
       <default>1</default>
-      <range min="0" max="7"/>
+      <range min="0" max="8"/>
       <summary>0 means disabled, 1 means default speed, animation speed otherwise</summary>
       <description>Animation Status</description>
-    </key>
-
-    <key type="s" name="activities-button-icon-path">
-      <default>''</default>
-      <summary>Activities Button Icon Path</summary>
-      <description>Activities Button Icon Path</description>
-    </key>
-
-    <key type="b" name="activities-button-icon-monochrome">
-      <default>true</default>
-      <summary>Activities Button Monochrome Icon Style</summary>
-      <description>Activities Button Monochrome Icon Style Status</description>
-    </key>
-
-    <key type="b" name="activities-button-label">
-      <default>true</default>
-      <summary>Activities Button Label Visiblity</summary>
-      <description>Activities Button Label Visiblity Status</description>
     </key>
 
     <key type="b" name="window-demands-attention-focus">
       <default>false</default>
       <summary>Window Demands Attention Focus</summary>
       <description>Window Demands Attention Focus Status</description>
+    </key>
+
+    <key type="b" name="window-maximized-on-create">
+      <default>false</default>
+      <summary>Window Maximized on Create</summary>
+      <description>Window Maximized on Create Status</description>
     </key>
 
     <key type="i" name="dash-icon-size">
@@ -243,8 +207,8 @@
 
     <key type="i" name="panel-size">
       <default>0</default>
-      <range min="0" max="60"/>
-      <summary>0 means use Shell theme, 1 - 61 means size in pixels</summary>
+      <range min="0" max="64"/>
+      <summary>0 means use Shell theme, 1 - 64 means size in pixels</summary>
       <description>Panel Size</description>
     </key>
 
@@ -322,7 +286,7 @@
       <summary>Weather Visibility in Clock Menu</summary>
       <description>Weather Visibility Status</description>
     </key>
-    
+
     <key type="b" name="events-button">
       <default>true</default>
       <summary>Events Button Visibility in Clock Menu</summary>
@@ -375,6 +339,12 @@
       <description>OSD Position Status</description>
     </key>
 
+    <key type="b" name="window-menu">
+      <default>true</default>
+      <summary>Window Menu</summary>
+      <description>Window Menu Status</description>
+    </key>
+
     <key type="b" name="window-menu-take-screenshot-button">
       <default>true</default>
       <summary>Window Menu Take Screenshot Button Visibility</summary>
@@ -425,6 +395,74 @@
       <default>true</default>
       <summary>Dash app running dot</summary>
       <description>Dash app running dot visibility status</description>
+    </key>
+
+    <key type="i" name="max-displayed-search-results">
+      <default>0</default>
+      <range min="0" max="40"/>
+      <summary>0 means default, max displayed search results otherwise</summary>
+      <description>Max Displayed Search Results</description>
+    </key>
+
+    <key type="b" name="quick-settings-dark-mode">
+      <default>true</default>
+      <summary>Dark Mode Toggle Button Visibility In Quick Settings</summary>
+      <description>Dark Mode Toggle Button Visibility Status</description>
+    </key>
+
+    <key type="b" name="quick-settings-night-light">
+      <default>true</default>
+      <summary>Night Light Toggle Button Visibility In Quick Settings</summary>
+      <description>Night Light Toggle Button Visibility Status</description>
+    </key>
+
+    <key type="b" name="quick-settings-do-not-disturb">
+      <default>true</default>
+      <summary>Do Not Disturb Toggle Button Visibility In Quick Settings</summary>
+      <description>Do Not Disturb Toggle Button Visibility Status</description>
+    </key>
+
+    <key type="b" name="quick-settings-backlight">
+      <default>true</default>
+      <summary>Backlight Toggle Button Visibility In Quick Settings</summary>
+      <description>Backlight Toggle Button Visibility Status</description>
+    </key>
+
+    <key type="b" name="quick-settings-airplane-mode">
+      <default>true</default>
+      <summary>Airplane Mode Toggle Button Visibility In Quick Settings</summary>
+      <description>Airplane Mode Toggle Button Visibility Status</description>
+    </key>
+
+    <key type="b" name="accent-color-icon">
+      <default>false</default>
+      <summary>Accent Color for Icons</summary>
+      <description>Use Accent for Icons</description>
+    </key>
+
+    <key type="b" name="workspace-thumbnail-to-main-view">
+      <default>false</default>
+      <summary>Workspace Thumbnail Click Always Goes To The Main View</summary>
+      <description>Workspace Thumbnail Click to Main View</description>
+    </key>
+
+    <key type="b" name="invert-calendar-column-items">
+      <default>false</default>
+      <summary>Invert Calendar Column Items Position</summary>
+      <description>Invert Calendar Column Items</description>
+    </key>
+
+    <key type="i" name="support-notifier-type">
+      <default>1</default>
+      <range min="0" max="1"/>
+      <summary>0 Means Never, 1 Means New Releases</summary>
+      <description>Support Notifier Type</description>
+    </key>
+
+    <key type="i" name="support-notifier-showed-version">
+      <default>0</default>
+      <summary>The Last Version The Support Notifier Showed Up</summary>
+      <description>Support Notifier Showed Version</description>
     </key>
 
   </schema>

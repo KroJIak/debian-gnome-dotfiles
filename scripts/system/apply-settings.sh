@@ -7,9 +7,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 gsettings set org.gnome.shell favorite-apps "[]"
 
 # keybinds
-pushd "$SCRIPT_DIR/keybinds" >/dev/null
-python3 setup.py
-popd >/dev/null
+bash "$SCRIPT_DIR/keybinds/setup.sh"
 
 # home folders
 bash "$SCRIPT_DIR/home-folders/apply.sh"
@@ -39,7 +37,7 @@ gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click true
 gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
 
 # large text
-gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.35
 
 # disable minimize and close buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout :

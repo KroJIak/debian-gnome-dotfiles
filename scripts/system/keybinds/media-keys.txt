@@ -1,4 +1,0 @@
-"logout" "<Super>semicolon"
-"screenshot" ""
-"area-screenshot" ""
-"window-screenshot" ""

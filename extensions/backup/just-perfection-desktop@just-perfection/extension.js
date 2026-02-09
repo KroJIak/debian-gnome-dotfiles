@@ -2,115 +2,157 @@
  * Extension
  *
  * @author     Javad Rahmatzadeh <j.rahmatzadeh@gmail.com>
- * @copyright  2020-2023
+ * @copyright  2020-2026
  * @license    GPL-3.0-only
  */
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Clutter from 'gi://Clutter';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
+import GObject from 'gi://GObject';
+import Meta from 'gi://Meta';
+import St from 'gi://St';
 
-const {API, Manager} = Me.imports.lib;
-const {GObject, GLib, Gio, St, Clutter, Meta} = imports.gi;
+import * as AltTab from 'resource:///org/gnome/shell/ui/altTab.js';
+import * as BackgroundMenu from 'resource:///org/gnome/shell/ui/backgroundMenu.js';
+import * as LookingGlass from 'resource:///org/gnome/shell/ui/lookingGlass.js';
+import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
+import * as OSDWindow from 'resource:///org/gnome/shell/ui/osdWindow.js';
+import * as OverviewControls from 'resource:///org/gnome/shell/ui/overviewControls.js';
+import * as Panel from 'resource:///org/gnome/shell/ui/panel.js';
+import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+import * as Search from 'resource:///org/gnome/shell/ui/search.js';
+import * as SearchController from 'resource:///org/gnome/shell/ui/searchController.js';
+import * as SwitcherPopup from 'resource:///org/gnome/shell/ui/switcherPopup.js';
+import * as WindowMenu from 'resource:///org/gnome/shell/ui/windowMenu.js';
+import * as WindowPreview from 'resource:///org/gnome/shell/ui/windowPreview.js';
+import * as Workspace from 'resource:///org/gnome/shell/ui/workspace.js';
+import * as WorkspacesView from 'resource:///org/gnome/shell/ui/workspacesView.js';
+import * as WorkspaceSwitcherPopup from 'resource:///org/gnome/shell/ui/workspaceSwitcherPopup.js';
+import * as WorkspaceThumbnail from 'resource:///org/gnome/shell/ui/workspaceThumbnail.js';
 
-const Util = imports.misc.util;
-const Config = imports.misc.config;
-const shellVersion = parseFloat(Config.PACKAGE_VERSION);
+import * as Config from 'resource:///org/gnome/shell/misc/config.js';
+import * as Util from 'resource:///org/gnome/shell/misc/util.js';
 
-const Main = imports.ui.main;
-const BackgroundMenu = imports.ui.backgroundMenu;
-const OverviewControls = imports.ui.overviewControls;
-const WorkspaceSwitcherPopup = imports.ui.workspaceSwitcherPopup;
-const SwitcherPopup = imports.ui.switcherPopup;
-const WorkspaceThumbnail = imports.ui.workspaceThumbnail;
-const SearchController = imports.ui.searchController;
-const Panel = imports.ui.panel;
-const WorkspacesView = imports.ui.workspacesView;
-const WindowPreview = imports.ui.windowPreview;
-const Workspace = imports.ui.workspace;
-const LookingGlass = imports.ui.lookingGlass;
-const MessageTray = imports.ui.messageTray;
-const OSDWindow = imports.ui.osdWindow;
-const WindowMenu = imports.ui.windowMenu;
-const AltTab = imports.ui.altTab;
+import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
 
-let manager;
-let api;
-
-/**
- * initiate extension
- *
- * @returns {void}
- */
-function init()
-{
-}
+import {API} from './lib/API.js';
+import {Manager} from './lib/Manager.js';
+import {SupportNotifier} from './lib/SupportNotifier.js';
 
 /**
- * enable extension
- *
- * @returns {void}
+ * Extension entry point
  */
-function enable()
+export default class JustPerfection extends Extension
 {
-    // Some old GNOME Shells can crash on enable while those versions are not
-    // supported. To avoid bad experience for those versions we simply `return`
-    if (shellVersion < 42) {
-        return;
+    /**
+     * Instance of API
+     *
+     * @type {API|null}
+     */
+    #api = null;
+
+    /**
+     * Instance of Manager
+     *
+     * @type {Manager|null}
+     */
+    #manager = null;
+
+    /**
+     * Instance of SupportNotifier
+     *
+     * @type {SupportNotifier|null}
+     */
+    #supportNotifier = null;
+
+    /**
+     * Enable extension
+     *
+     * @returns {void}
+     */
+    enable()
+    {
+        const shellVersion = parseFloat(Config.PACKAGE_VERSION);
+        const extensionVersion = parseInt(this.metadata.version);
+
+        let InterfaceSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+
+        this.#api = new API(
+            {
+                Main,
+                BackgroundMenu,
+                OverviewControls,
+                WorkspaceSwitcherPopup,
+                SwitcherPopup,
+                InterfaceSettings,
+                Search,
+                SearchController,
+                WorkspaceThumbnail,
+                WorkspacesView,
+                Panel,
+                PanelMenu,
+                WindowPreview,
+                Workspace,
+                LookingGlass,
+                MessageTray,
+                OSDWindow,
+                WindowMenu,
+                AltTab,
+                St,
+                GLib,
+                Clutter,
+                Util,
+                Meta,
+                GObject,
+            },
+            shellVersion
+        );
+
+        this.#api.open();
+
+        let settings = this.getSettings();
+
+        this.#manager = new Manager(
+            {
+                API: this.#api,
+                Settings: settings,
+            }
+        );
+
+        this.#manager.start();
+
+        this.#supportNotifier = new SupportNotifier(
+            {
+                MessageTray,
+                Main,
+                GLib,
+                Gio,
+                Settings: settings,
+            },
+            shellVersion,
+            extensionVersion,
+            this
+        );
+
+        this.#supportNotifier.start();
     }
 
-    let InterfaceSettings = new Gio.Settings({schema_id: 'org.gnome.desktop.interface'});
+    /**
+     * Disable extension
+     *
+     * @returns {void}
+     */
+    disable()
+    {
+        this.#manager?.stop();
+        this.#manager = null;
 
-    api = new API.API({
-        Main,
-        BackgroundMenu,
-        OverviewControls,
-        WorkspaceSwitcherPopup,
-        SwitcherPopup,
-        InterfaceSettings,
-        SearchController,
-        WorkspaceThumbnail,
-        WorkspacesView,
-        Panel,
-        WindowPreview,
-        Workspace,
-        LookingGlass,
-        MessageTray,
-        OSDWindow,
-        WindowMenu,
-        AltTab,
-        St,
-        Gio,
-        GLib,
-        Clutter,
-        Util,
-        Meta,
-        GObject,
-    }, shellVersion);
+        this.#api?.close();
+        this.#api = null;
 
-    api.open();
-
-    let settings = ExtensionUtils.getSettings();
-
-    manager = new Manager.Manager({
-        API: api,
-        Settings: settings,
-    }, shellVersion);
-
-    manager.registerSettingsSignals();
-    manager.applyAll();
+        this.#supportNotifier?.stop();
+        this.#supportNotifier = null;
+    }
 }
-
-/**
- * disable extension
- *
- * @returns {void}
- */
-function disable()
-{
-    manager?.revertAll();
-    manager = null;
-
-    api?.close();
-    api = null;
-}
-

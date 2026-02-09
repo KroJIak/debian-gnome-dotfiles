@@ -2,22 +2,162 @@
 
 All notable changes to this project will be documented in this file.
 
-We go to the next version after each release on 
+We go to the next version after each release on the
 [GNOME Shell Extensions website](https://extensions.gnome.org/).
 
 ## [Unreleased]
 
-## [26.0.0 Rosa] - 2023-08-07
+## [36.0] - 2026-01-26
+
+### Added
+
+- Backlight Toggle Button Visibility in Quick Settings.
+- Do Not Disturb Toggle Button Visibility in Quick Settings by @michael.online.
+- GNOME Shell 50 Support.
 
 ### Fixed
 
-- remove not defined.
+- Looking Glass Position on Vertical Panel.
+- On Screen Display (OSD) visibility on GNOME Shell 49.
 
-## [25.0.0 Rosa] - 2023-08-07
+### Removed
+
+- Icons page from preferences window and moved the items to the visibility page.
+
+## [35.0] - 2025-08-29
+
+### Added
+
+- GNOME Shell 49 Support.
+- Window Menu Visibility.
+
+### Fixed
+
+- Avoid showing support notifications immediately after login.
+- Primary monitor error for registering looking glass signals.
+- Startup freeze on NixOS.
+- The page icon in preferences window for GNOME Shell 48.
+
+## [34.0] - 2025-02-02
+
+### Removed
+
+- The monthly notification support.
+
+## [33.0] - 2025-02-02
+
+### Fixed
+
+- The monthly notification support calculation.
+- German Translation by [@uwe-ss](https://gitlab.gnome.org/uwe-ss).
+
+## [32.0] - 2025-02-01
+
+### Added
+
+- Airplane Mode Toggle Button Visibility in Quick Settings.
+- GNOME Shell 48 Support.
+- More Crypto Donations (XRP, Solana, Cardano, BNB, Stellar, USDC, LTC, Shiba Inu and LBRY).
+- Support Notifier.
+
+### Fixed
+
+- Looking Glass `_resize()` issue.
+
+## [31.0] - 2025-01-06
+
+### Added
+
+- Accent Color for Icons.
+- Crypto Support to the Preferences Window.
+- Invert Calendar Column Items.
+- Night Light Toggle Button Visibility in Quick Settings.
+- Workspace Switcher Click Always Goes to The Main View.
+- Ukrainian Translation by [@vovkiv](https://gitlab.gnome.org/vovkiv).
+
+### Fixed
+
+- Search margin when using high display scale factor and panel in overview feature.
+- Slowest animation.
+- The dash app running indicator visibility (GNOME Shell 46 and 47).
+- The Looking Glass Position Using Inspector in Overview.
+- The Workspaces Shadow in App Grid When the Search is Disabled.
+
+## [30.0] - 2024-07-31
+
+### Added
+
+- GNOME Shell 47 Support.
+
+## [29.0] - 2024-07-06
+
+### Added
+
+- Dark Mode Toggle Button Visibility in Quick Settings.
+- Maximum Displayed Search Results feature (GNOME Shell 45 and higher).
+- Gresources compiled file for the preferences window to load faster.
+
+### Fixed
+
+- Alt-Tab Switcher list Item Background Color for Shell Theme Override (GNOME Shell 46).
+- Hidden panel timeout priority on Wayland.
+- Panel Menu not Showing Up On Bottom Panel When the Height is Larger than the Screen Height.
+- The dash app running indicator visibility.
+- Workspace Popup visibility CPU usage.
+- Japanese Translation by [@gnuey56](https://gitlab.gnome.org/gnuey56).
 
 ### Changed
 
-- The behavior of the panel if shown only in the overview.
+- The clock menu position widget to `AdwSpinRow`.
+- The panel height maximum size to 64.
+
+## [28.0 Lear] - 2024-03-06
+
+### Added
+
+- Buy Me a Coffee donation link.
+- GNOME Shell 46 Support.
+- Option to maximize windows on creation by [@droserasprout](https://gitlab.gnome.org/droserasprout).
+
+### Fixed
+
+- The world clock visibility coming back after reboot or install change.
+
+### Removed
+
+- Window Picker Shell Theme Override.
+- Search Shell Theme Override.
+- Workspace Animation Shell Theme Override.
+- Dash Background Shell Theme Override.
+
+## [27.0 Durer] - 2023-09-14
+
+### Changed
+
+- The world clocks visibility from CSS to JS.
+
+### Added
+
+- "Almost none" option to animation speed feature (GNOME Shell 45).
+- GNOME Shell 45 Support.
+- Japanese Translation by [@gnuey56](https://gitlab.gnome.org/gnuey56).
+
+### Removed
+
+- Activities button icon feature (GNOME Shell 45).
+- App menu indicator (GNOME Shell 45).
+
+## [26.0 Rosa] - 2023-08-07
+
+### Fixed
+
+- Remove not defined.
+
+## [25.0 Rosa] - 2023-08-07
+
+### Changed
+
+- The behavior of the panel is shown only in the overview.
   Rather than sliding in from the top, it is now rendered behind the workspaces
   by [Schneegans](https://gitlab.gnome.org/Schneegans).
 
@@ -25,16 +165,16 @@ We go to the next version after each release on
 
 - a11y error in GNOME Shell mobile.
 - Activities button error in GNOME Shell mobile.
-- Marked as urgent signal for window demand attention focus feature.
+- Marked as an urgent signal for window demand attention focus feature.
 - Panel flickering when its position is at the bottom.
 - `.set_icon_size` is not a function error (Date Menu).
-- Unwanted padding on disabled power icon.
-- Unwanted shadow for workspace in app grid.
+- Unwanted padding on the disabled power icon.
+- Unwanted shadow for workspace in the app grid.
 
 ### Added
 
 - Dash app running visibility.
-- Disable overlay key.
+- Disable the overlay key.
 - EGO donations.
 - Workspace peek (GNOME Shell 42 and higher).
 
@@ -42,7 +182,7 @@ We go to the next version after each release on
 
 - GNOME Shell support (3.36, 3.38, 40 and 41 no longer getting new features).
 
-## [24.0.0 Hals] - 2023-03-01
+## [24.0 Hals] - 2023-03-01
 
 ### Changed
 
@@ -53,22 +193,22 @@ We go to the next version after each release on
 - GNOME Shell 44 support.
 - Transparent dash background for shell theme override (GNOME Shell 4x only).
 
-## [23.0.0 Goya] - 2023-02-10
+## [23.0 Goya] - 2023-02-10
 
 ### Changed
 
 - Clock menu offset maximum to 20.
-- Fastest animation speed (twice as fast before).
+- Fastest animation speed (twice as fast as before).
 
 ### Fixed
 
 - App menu label visibility compatibility issue with open whether extension.
 - Hidden workspace switcher padding in overview.
-- Keep clock menu position when another widget adds to the panel.
-- Looking glass API conflict with Dash to Panel extension.
-- Looking glass error when primary monitor doesn't exist.
+- Keep the clock menu position when another widget is added to the panel.
+- Looking Glass API conflicts with the "Dash to Panel" extension.
+- Looking Glass error when primary monitor doesn't exist.
 - Window preview gap when window picker close button is disabled.
-- Workspace boxes top margin in app grid when the search entry is disabled.
+- Workspace boxes top margin in the app grid when the search entry is disabled.
 - Italian translation by [@svityboy](https://gitlab.gnome.org/svityboy).
 
 ### Added
@@ -79,7 +219,7 @@ We go to the next version after each release on
 - Screen sharing indicator visibility.
 - Switcher popup delay by [@koplo199](https://gitlab.gnome.org/koplo199).
 
-## [22.0.0 Millet] - 2022-09-10
+## [22.0 Millet] - 2022-09-10
 
 ### Fixed
 
@@ -96,7 +236,7 @@ We go to the next version after each release on
 
 - Aggregate menu for GNOME Shell 43 and higher.
 
-## [21.0.0 Reynolds] - 2022-08-06
+## [21.0 Reynolds] - 2022-08-06
 
 ### Changed
 
@@ -114,13 +254,13 @@ We go to the next version after each release on
 
 ### Added
 
-- Alt Tab window preview icon size.
-- Alt Tab window preview size.
-- Alt Tab icon size.
+- Alt-Tab window preview icon size.
+- Alt-Tab window preview size.
+- Alt-Tab icon size.
 - Dash separator visibility.
 - Looking glass size by [@AdvendraDeswanta](https://gitlab.gnome.org/AdvendraDeswanta).
 - OSD position.
-- Take screenshot button in window menu visibility.
+- Take the screenshot button in the window menu visibility.
 
 ### Removed
 
@@ -128,7 +268,7 @@ We go to the next version after each release on
 - List box separators for GNOME Shell 40 and 41 (EOS).
 - Prefs intro.
 
-## [20.0.0 Hayez] - 2022-04-01
+## [20.0 Hayez] - 2022-04-01
 
 ### Fixed
 
@@ -141,19 +281,19 @@ We go to the next version after each release on
 
 ### Added
 
-- Events visibility in clock menu.
-- Calendar visibility in clock menu.
+- Events visibility in the clock menu.
+- Calendar visibility in the clock menu.
 - Dutch translation by [@Vistaus](https://gitlab.gnome.org/Vistaus).
 
-## [19.0.0 Ancher] - 2022-03-02
+## [19.0 Ancher] - 2022-03-02
 
 ### Fixed
 
-- Blurry search entry on GNOME Shell themes with box-shadow.
+- Blurry search entry on GNOME Shell themes with "box-shadow".
 - Prefs file chooser recursion.
 - SecondaryMonitorDisplay error on GNOME Shell 42.
-- Shell theme override OSD for GNOME Shell 42.
-- Shell theme override workspace switcher for GNOME Shell 42.
+- Shell theme overrides OSD on GNOME Shell 42.
+- Shell theme overrides the workspace switcher on GNOME Shell 42.
 - Workspace popup visibility in GNOME Shell 42.
 
 ### Added
@@ -163,13 +303,13 @@ We go to the next version after each release on
 - Panel world clock visibility.
 - Weather visibility.
 
-## [18.0.0 Roslin] - 2022-02-12
+## [18.0 Roslin] - 2022-02-12
 
 ### Fixed
 
 - GNOME 3.x prefs error.
 
-## [17.0.0 Roslin] - 2022-02-11
+## [17.0 Roslin] - 2022-02-11
 
 ### Fixed
 
@@ -194,7 +334,7 @@ We go to the next version after each release on
 
 - Panel corner size option for GNOME Shell 42.
 
-## [16.0.0 Rembrandt] - 2021-11-15
+## [16.0 Rembrandt] - 2021-11-15
 
 ### Fixed
 
@@ -217,7 +357,7 @@ We go to the next version after each release on
 - Profile selector to the prefs window.
 - Ripple box.
 
-## [15.0.0 Magnetized] - 2021-09-22
+## [15.0 Magnetized] - 2021-09-22
 
 ### Fixed
 
@@ -227,7 +367,7 @@ We go to the next version after each release on
 
 - Hot corner support for GNOME Shell 41.
 
-## [14.0.0 Magnetized] - 2021-09-22
+## [14.0 Magnetized] - 2021-09-22
 
 ### Changed
 
@@ -257,7 +397,7 @@ We go to the next version after each release on
 - Panel indicator padding size.
 - Window picker close button visibility.
 
-## [13.0.0 Ring] - 2021-08-10
+## [13.0 Ring] - 2021-08-10
 
 ### Changed
 
@@ -284,7 +424,7 @@ We go to the next version after each release on
 - Workspace background corner size in overview.
 - Workspace wraparound (modified version of WorkspaceSwitcherWrapAround by [@war1025](https://github.com/war1025)).
 
-## [12.0.0 Queen Red] - 2021-06-29
+## [12.0 Queen Red] - 2021-06-29
 
 ### Changed
 
@@ -308,7 +448,7 @@ We go to the next version after each release on
 - Workspaces visibility in app grid by [@fmuellner](https://gitlab.gnome.org/fmuellner).
 - Chinese (Taiwan) translation by [@r0930514](https://gitlab.com/r0930514).
 
-## [11.0.0 Whisper] - 2021-05-20
+## [11.0 Whisper] - 2021-05-20
 
 ### Changed
 
@@ -334,7 +474,7 @@ We go to the next version after each release on
 - Dash icon size.
 - Window demands attention focus.
 
-## [10.0.0] - 2021-03-26
+## [10.0] - 2021-03-26
 
 ### Changed
 
@@ -362,7 +502,7 @@ We go to the next version after each release on
 - Catalan translation by [@juxuanu](https://gitlab.com/juxuanu).
 - Galician translation by [@frandieguez](https://gitlab.com/frandieguez).
 
-## [9.0.0] - 2021-03-06
+## [9.0] - 2021-03-06
 
 ### Changed
 
@@ -379,7 +519,7 @@ We go to the next version after each release on
 - Panel position.
 - Support to prefs window.
 
-## [8.0.0] - 2021-02-22
+## [8.0] - 2021-02-22
 
 ### Changed
 
@@ -394,7 +534,7 @@ We go to the next version after each release on
 - Workspace switcher enable related to workspace switcher size.
 - Nepali translation filename by [@IBA4](https://gitlab.com/IBA4).
 
-## [7.0.0] - 2021-02-12
+## [7.0] - 2021-02-12
 
 ### Fixed
 
@@ -412,7 +552,7 @@ We go to the next version after each release on
 - Nepali translation by [@IBA4](https://gitlab.com/IBA4).
 - Spanish translation by [@oscfdezdz](https://gitlab.com/oscfdezdz).
 
-## [6.0.0] - 2021-01-29
+## [6.0] - 2021-01-29
 
 ### Fixed
 
@@ -421,7 +561,7 @@ We go to the next version after each release on
 - GNOME Shell 40 support for search entry.
 - GNOME Shell 40 support for workspace switcher.
 
-## [5.0.0] - 2021-01-05
+## [5.0] - 2021-01-05
 
 ### Added
 
@@ -442,7 +582,7 @@ We go to the next version after each release on
 - Padding on no dash.
 - Search top padding on no top panel.
 
-## [4.0.0] 2020-12-25
+## [4.0] 2020-12-25
 
 ### Added
 
@@ -462,7 +602,7 @@ We go to the next version after each release on
 
 - Top padding on no search and no top panel.
 
-## [3.0.0] - 2020-12-21
+## [3.0] - 2020-12-21
 
 ### Added
 
@@ -472,13 +612,12 @@ We go to the next version after each release on
 - Initial Translations.
 - Prefs as extension settings.
 
-## [2.0.0] - 2020-11-18
+## [2.0] - 2020-11-18
 
 ### Fixed
 
 - Destroy hot corner on disable.
 
-## [1.0.0] - 2020-11-15
 
 ### Added
 
@@ -489,4 +628,3 @@ We go to the next version after each release on
 - Hide top panel.
 - Hide workspace switcher.
 - Hot corner to toggle overview visibility.
-

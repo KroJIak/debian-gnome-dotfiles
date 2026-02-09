@@ -2,53 +2,55 @@
  * Prefs Dialog
  *
  * @author     Javad Rahmatzadeh <j.rahmatzadeh@gmail.com>
- * @copyright  2020-2023
+ * @copyright  2020-2026
  * @license    GPL-3.0-only
  */
 
-const ExtensionUtils = imports.misc.extensionUtils;
-const Me = ExtensionUtils.getCurrentExtension();
+import Adw from 'gi://Adw';
+import Gtk from 'gi://Gtk';
+import Gdk from 'gi://Gdk';
+import Gio from 'gi://Gio';
+import GLib from 'gi://GLib';
 
-const {Prefs, PrefsKeys} = Me.imports.lib.Prefs;
-const {Gtk, Gdk, Gio, GLib} = imports.gi;
+import {ExtensionPreferences} from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
+import * as Config from 'resource:///org/gnome/Shell/Extensions/js/misc/config.js';
 
-const Config = imports.misc.config;
-const shellVersion = parseFloat(Config.PACKAGE_VERSION);
-
-const gettextDomain = Me.metadata['gettext-domain'];
-
-/**
- * references window initiation
- *
- * @returns {void}
- */
-function init()
-{
-    ExtensionUtils.initTranslations();
-}
+import {Prefs} from './lib/Prefs/Prefs.js';
+import {PrefsKeys} from './lib/Prefs/PrefsKeys.js';
 
 /**
- * fill preferences window
- *
- * @returns {void}
+ * Preferences window entry point
  */
-function fillPreferencesWindow(window)
+export default class JustPerfectionPrefs extends ExtensionPreferences
 {
-    let UIFolderPath = Me.dir.get_child('ui').get_path();
-    let prefsKeys = new PrefsKeys.PrefsKeys(shellVersion);
+    /**
+     * fill preferences window
+     *
+     * @returns {void}
+     */
+    fillPreferencesWindow(window)
+    {
+        const shellVersion = parseFloat(Config.PACKAGE_VERSION);
+        const gettextDomain = this.metadata['gettext-domain'];
 
-    let prefs = new Prefs.Prefs(
-        {
-            Builder: new Gtk.Builder(),
-            Settings: ExtensionUtils.getSettings(),
-            Gtk,
-            Gdk,
-            Gio,
-            GLib,
-        },
-        prefsKeys,
-        shellVersion
-    );
+        let ResourcesFolderPath = this.path;
+        let prefsKeys = new PrefsKeys(shellVersion);
 
-    prefs.fillPrefsWindow(window, UIFolderPath, gettextDomain);
+        let prefs = new Prefs(
+            {
+                Builder: new Gtk.Builder(),
+                Settings: this.getSettings(),
+                CssProvider: new Gtk.CssProvider(),
+                Adw,
+                Gtk,
+                Gdk,
+                Gio,
+                GLib,
+            },
+            prefsKeys,
+            shellVersion
+        );
+
+        prefs.fillPrefsWindow(window, ResourcesFolderPath, gettextDomain);
+    }
 }
