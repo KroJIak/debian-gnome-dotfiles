@@ -1,3 +1,6 @@
 [submodule "scripts/fixes/x11-fractional-scaling"]
 	path = scripts/fixes/x11-fractional-scaling
 	url = https://github.com/KroJIak/debian-gnome-x11-fractional-scaling.git
+[submodule "scripts/apps/extra/redvpn-client-manager"]
+	path = scripts/apps/extra/redvpn
+	url = https://github.com/KroJIak/redvpn-client-manager.git
