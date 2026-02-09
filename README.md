@@ -97,18 +97,18 @@ I left some applications from gnome, because they are more convenient than their
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
 ```
-#### Remove this packages **([remove_trash.sh](scripts/apps/remove_trash.sh))**
+#### Remove this packages **([00-remove-gnome-bloat.sh](scripts/apps/00-remove-gnome-bloat.sh))**
 ```Terminal
 sudo apt remove -y gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
 ```
 ### Installing applications
-#### Snap installing **([snap.sh](scripts/apps/snap.sh))**
+#### Snap installing **([10-snapd.sh](scripts/apps/10-snapd.sh))**
 Before you start installing applications, you need to install snap, for easy installation of other applications.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install snapd -y
 ```
-#### Required applications **([required_apps.sh](scripts/apps/required_apps.sh))**
+#### Required applications **([20-required.sh](scripts/apps/20-required.sh))**
 The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
 ```Terminal
 sudo snap install btop
@@ -117,13 +117,15 @@ sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio
 # Change the default shell to fish
 sudo chsh $USER -s /usr/bin/fish
 ```
-If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei_sound_fix/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
+If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei-sound/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
 
-I also recommend using `flameshot` instead of the standard screenshot app:
+I use `flameshot` instead of the standard screenshot app (required):
 ```Terminal
-sudo apt remove gnome-screenshot && sudo apt install -y flameshot
+sudo apt remove gnome-screenshot
+sudo apt install -y flameshot
 ```
-#### Optional applications **([optional_apps.sh](scripts/apps/optional_apps.sh))**
+Script: **([60-flameshot.sh](scripts/apps/extra/60-flameshot.sh))**
+#### Optional applications **([30-optional.sh](scripts/apps/30-optional.sh))**
 For my tasks, I use the following minimal application stack. This installation is optional.
 ```Terminal
 sudo apt update -y && sudo apt upgrade -y
@@ -137,7 +139,7 @@ sudo snap install discord
 sudo snap install arduino
 sudo usermod -a -G dialout $USER
 ```
-Docker **([docker.sh](scripts/apps/docker.sh))**:
+Docker **([40-docker.sh](scripts/apps/extra/40-docker.sh))**:
 ```Terminal
 # Add Docker's official GPG key:
 sudo apt update -y
@@ -155,7 +157,7 @@ sudo apt update -y
 
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
-Yandex Music **([yandex_music.sh](scripts/apps/yandex_music.sh))**:
+Yandex Music **([50-yandex-music.sh](scripts/apps/extra/50-yandex-music.sh))**:
 ```Terminal
 # Variables
 REPO_URL="https://api.github.com/repos/cucumber-sp/yandex-music-linux/releases/latest"
@@ -185,7 +187,7 @@ sudo apt autoremove -y
 ```
 ### Installing configs and extensions
 In addition to the applications themselves, you need to install wallpapers, configs of these applications, settings and extensions with their configs.
-#### Adding images **([add_images.sh](scripts/custom/add_images.sh))**
+#### Adding images **([add-images.sh](scripts/system/add-images.sh))**
 ```Terminal
 sudo rm ~/.face
 sudo rm ~/.face.icon
@@ -193,18 +195,18 @@ sudo rm ~/.face.icon
 cp ../../home/background2K.png ~/.background2K.png
 cp ../../home/gdm_background2K.png ~/.gdm_background2K.png
 ```
-#### Adding configs **([config.sh](scripts/custom/config.sh))**
+#### Adding configs **([apply-configs.sh](scripts/system/apply-configs.sh))**
 ```Terminal
 sudo rm -r ~/.config
 cp -r ../../config ~/.config 
 ```
-#### Adding extensions **([set_extensions.sh](scripts/custom/set_extensions.sh))**
+#### Adding extensions **([apply-extensions.sh](scripts/system/apply-extensions.sh))**
 ```Terminal
 mkdir ~/.local/share/gnome-shell/extensions
 cp -r ../../extensions/backup/* ~/.local/share/gnome-shell/extensions/
 dconf load /org/gnome/shell/extensions/ < ../../extensions/settings_backup.txt
 ```
-To enable them, run the following commands after restarting **([enable_extensions.sh](scripts/custom/enable_extensions.sh))**:
+To enable them, run the following commands after restarting **([enable-extensions.sh](scripts/system/enable-extensions.sh))**:
 ```
 gnome-extensions enable just-perfection-desktop@just-perfection
 gnome-extensions enable mediacontrols@cliffniff.github.com
@@ -221,7 +223,7 @@ gnome-extensions enable trayIconsReloaded@selfmade.pl
 gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
 gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
 ```
-#### Updating ssh config **([update_ssh_config.sh](scripts/custom/update_ssh.config.sh))**:
+#### Updating ssh config **([update-ssh-config.sh](scripts/system/update-ssh-config.sh))**:
 ```
 mkdir $HOME/.ssh
 SSH_CONFIG_FILE="$HOME/.ssh/config"
