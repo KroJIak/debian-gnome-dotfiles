@@ -1,0 +1,16 @@
+{
+    "com.github.ghostdevv.ulauncher-tailscale": {
+        "id": "com.github.ghostdevv.ulauncher-tailscale",
+        "url": "https://github.com/ghostdevv/ulauncher-tailscale",
+        "updated_at": "2026-02-10T06:45:09.262211",
+        "last_commit": "5f4a43359e1df1f0c9b79104e8c006cdfead0903",
+        "last_commit_time": "2025-06-16T05:45:50"
+    },
+    "com.github.cosmincraciun97.port-killer-ulauncher": {
+        "id": "com.github.cosmincraciun97.port-killer-ulauncher",
+        "url": "https://github.com/cosmincraciun97/port-killer-ulauncher",
+        "updated_at": "2026-02-10T06:48:48.941685",
+        "last_commit": "474f8cc6a197b8197279906e4c3be6cd5a9bfb83",
+        "last_commit_time": "2025-09-08T11:19:58"
+    }
+}

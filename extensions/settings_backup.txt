@@ -7,8 +7,10 @@ brightness=0.59999999999999998
 sigma=30
 
 [blur-my-shell/applications]
-blur=false
-brightness=0.0
+blur=true
+brightness=1.0
+dynamic-opacity=false
+enable-all=true
 opacity=255
 sigma=4
 
@@ -231,7 +233,7 @@ left-box-order=['activities', 'dateMenu', 'TrayIconsReloaded', 'screenSharing', 
 right-box-order=['vitalsMenu', 'Another Window Session Manager', 'tiling-assistant@leleat-on-github', 'screenRecording', 'dwellClick', 'a11y', 'clipboardIndicator', 'keyboard', 'quickSettings']
 
 [trayIconsReloaded]
-applications='[{"id":"menu.kando.Kando.desktop","hidden":true}]'
+applications='[{"id":"ulauncher.desktop","hidden":true},{"id":"org.flameshot.Flameshot.desktop","hidden":true}]'
 icon-contrast=0
 icon-margin-horizontal=4
 icon-padding-horizontal=15

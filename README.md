@@ -1,321 +1,145 @@
-# Dotfiles
-## Introduction
-This repository was created to quickly install my settings, configs and applications on Debian Gnome. This dotfile parodies the capabilities of bspwm (switching desktops, disabling minimize buttons, closing windows, etc.), but leaves the original settings and applications native to gnome.
-# About
-- **Distro:** Debian 12 (bookworm)
-- **Display Server:** X11
-- **Display Manager:** GDM
-- **Desktop Environment:** Gnome 43.9
+# Debian GNOME Dotfiles
 
-![Desktop view](assets/desktop.png)
-- **Terminal:** Kitty
-- **CLI Shell:** Fish
-- **File Manager:** Nautilus
+## Overview
+- **Distro:** Debian 13
+- **Display server:** X11
+- **Display manager:** GDM
+- **Desktop environment:** GNOME 48
+- **Terminal:** Tilix
+- **Shell:** Zsh + Starship
+- **File manager:** Nautilus
+- **Shell theme:** Everforest Dark Medium B GS (Custom fork)
+- **GTK theme (legacy apps):** Everforest Green Dark (Custom fork)
 
-![Terminal view](assets/terminal.png)
-- **Sound Mixer:** PulseAudio
-- **Task Manager:** btop++
+## Screenshots
+Placeholders for new screenshots:
+- assets/screenshots/desktop.png
+- assets/screenshots/terminal.png
+- assets/screenshots/overview.png
+- assets/screenshots/quick-settings.png
+- assets/screenshots/plymouth.png
 
-![btop++ view](assets/btop.png)
-- **Media Player:** MPV
-- **GTK Theme:** Orchis green dark
+## Repository Layout
+- **Install stages:** [scripts/install](scripts/install)
+- **Apps:** [scripts/apps](scripts/apps)
+- **System:** [scripts/system](scripts/system)
+- **Fixes:** [scripts/fixes](scripts/fixes)
+- **Extensions backup:** [extensions](extensions)
+- **Themes:** [gtk-theme](gtk-theme)
+- **Plymouth files:** [grub-plymouth](grub-plymouth)
 
-![Media player and theme view](assets/media-player-and-theme.png)
-- **Web Browser:** Firefox
-- **Torrent Client:** qBitTorrent
-- **Quick Access Toolbar (Dock replacement):** Gnome Pie
-
-![Gnome pie view](assets/gnome-pie.gif)
-# Setup
-`Total installation time:` **`21 minutes`**
-## Debian Expert Installer
-First, you need to install the Debian 12 image. The installation can be done via a USB flash drive.
-Next, select the following options:
-`Advanced options -> Expert install`
-#### Choose language
-- Language: `English`
-- Country: `other -> Europe -> Russian Federation` (This method is used to select Russian as a secondary language)
-- Default locale: `United States (en_US.UTF-8)`
-- Other locale: `ru_RU.UTF-8`
-- Select default locale: `en_US.UTF-8`
-#### Detect and mount installation media
-- Activate
-#### Load installer components from installation media
-- don't specify anything, just click `Continue`
-#### Detect network hardware
-- Activate
-#### Configure the network
-- Auto-configure networking?: `Yes`
-- Just click `Continue`
-- Hostname: change it to what you want (for example, `"my-host"`)
-- Domain name: `Continue`
-#### Set up users and passwords
-- Allow login as root?: `No`
-- Full name for the new user: you can just skip
-- Username for your account: preferably in small letters (it will be more convenient, for example, `"my-user"`)
-- Choose a password for the new user: Just a password
-#### Configure the clock
-- Set the clock using NTP?: `Yes`
-- NTP server to use: Just click `Continue`
-- Select your time zone: Choose your option
-#### Detect disks
-- Activate
-#### Partition disks
-- you can handle it yourself :)
-#### Install the base system
-- Kernel to install: `linux-image-amd64` (for example)
-- Drivers to include in the initrd: `generic: include all available drivers`
-#### Configure the package manager
-- Scan extra installation media?: `No`
-- Use a network mirror?: `Yes`
-- Protocol for file downloads: `http`
-- Debian archive mirror country: choose your country
-- Debian archive mirror: `deb.debian.org`
-- Just click `Continue`
-- Use non-free firmware?: `Yes`
-- Use non-free software?: `Yes`
-- Enable source repositories in APT?: `Yes`
-- Services to use: Just click `Continue`
-#### Select and install software
-- Updates management on this system: `No automatic updates`
-- Participate in the package usage survey?: `No`
-- Choose software to install: Leave everything as it is, just click `Continue`
-#### Install the GRUB boot loader
-- Run os-prober automatically to detect and boot other OSes?: `Yes`
-- Install the GRUB boot loader to your primary drive?: `Yes`
-#### Finish the installation
-- Is the system clock set to UTC?: `Yes`
-- Please choose `<Continue>` to reboot: `Continue`
-## Automatic installation
-In order not to manually install all the components, a script ([install.sh](install.sh)) was built to install each of the stages automatically. Also, don't forget to look at the #Extra Steps tab
-
-If you cloned this repo without submodules, initialize them first:
-```Terminal
+## Quick Install
+### 1) Init submodules
+```bash
 git submodule update --init --recursive
 ```
 
-If you do not want to install something from below, the installation of each component is scheduled in stages.
-## Manual installation
-### Removing applications
-I left some applications from gnome, because they are more convenient than their counterparts and have functionality related to gnome itself, but I deleted some of them:
-#### Update packages
-```Terminal
-sudo apt update -y && sudo apt upgrade -y
+### 2) Run installer
+```bash
+./install.sh
 ```
-#### Remove this packages **([00-remove-gnome-bloat.sh](scripts/apps/00-remove-gnome-bloat.sh))**
-```Terminal
-sudo apt remove -y gnome-contacts gnome-weather gnome-2048 gnome-maps aisleriot gnome-calendar gnome-chess gnome-system-monitor gnome-logs gnome-characters five-or-more four-in-a-row hitori gnome-klotski lightsoff gnome-mahjongg gnome-mines gnome-music gnome-nibbles quadrapassel rhythmbox gnome-robots shotwell gnome-sound-recorder gnome-sudoku swell-foop tali gnome-taquin gnome-tetravex seahorse iagno totem
-```
-### Installing applications
-#### Snap installing **([10-snapd.sh](scripts/apps/10-snapd.sh))**
-Before you start installing applications, you need to install snap, for easy installation of other applications.
-```Terminal
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install snapd -y
-```
-#### Required applications **([20-required.sh](scripts/apps/20-required.sh))**
-The following applications are required to install for easy use. I decided not to stray far from the decision of the author of the [repository](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) and also use the `kitty` terminal with `fish`.
-```Terminal
-sudo snap install btop
-sudo apt install -y dconf-editor fish gnome-pie grub-customizer kitty pulseaudio curl git neofetch mpv openvpn network-manager-openvpn-gnome
 
-# Change the default shell to fish
-sudo chsh $USER -s /usr/bin/fish
-```
-If your laptop is Huawei 14s/16s, you may have some sound problems. To solve this, run the fix [script](scripts/fixes/huawei-sound/install.sh) (taken from [here](https://github.com/Smoren/huawei-ubuntu-sound-fix)).
+### Flags
+- `--debug`
+- `-y`, `--yes`
+- `--skip-optional-apps`
+- `--skip-fixes`
+- `--skip-system`
+- `--only-fixes`
+- `--only-system`
 
-I use `flameshot` instead of the standard screenshot app (required):
-```Terminal
-sudo apt remove gnome-screenshot
-sudo apt install -y flameshot
-```
-Script: **([60-flameshot.sh](scripts/apps/extra/60-flameshot.sh))**
-#### Optional applications **([30-optional.sh](scripts/apps/30-optional.sh))**
-For my tasks, I use the following minimal application stack. This installation is optional.
-```Terminal
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y qbittorrent
-sudo snap install pycharm-community --classic
-sudo snap install intellij-idea-ultimate --classic
-sudo snap install code --classic
-sudo snap install obsidian --classic
-# sudo snap install telegram-desktop # | Optionally install ayugram-desktop from telegram channel
-sudo snap install discord
-sudo snap install arduino
-sudo usermod -a -G dialout $USER
-```
-Docker **([40-docker.sh](scripts/apps/extra/40-docker.sh))**:
-```Terminal
-# Add Docker's official GPG key:
-sudo apt update -y
-sudo apt install -y ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+Reboot after install.
 
-# Add the repository to Apt sources:
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update -y
+## Manual Stages
+### Stage 1: Apps
+- Remove GNOME bloat: [scripts/apps/00-remove-gnome-bloat.sh](scripts/apps/00-remove-gnome-bloat.sh)
+- Install snap: [scripts/apps/10-snapd.sh](scripts/apps/10-snapd.sh)
+- Install flatpak: [scripts/apps/15-flatpak.sh](scripts/apps/15-flatpak.sh)
+- Required apps: [scripts/apps/20-required.sh](scripts/apps/20-required.sh)
+- Optional apps: [scripts/apps/30-optional.sh](scripts/apps/30-optional.sh)
 
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
-Yandex Music **([50-yandex-music.sh](scripts/apps/extra/50-yandex-music.sh))**:
-```Terminal
-# Variables
-REPO_URL="https://api.github.com/repos/cucumber-sp/yandex-music-linux/releases/latest"
-TEMP_DEB="/tmp/yandex-music-linux.deb"
-# Install dependencies
-sudo apt-get update
-sudo apt-get install -y curl jq
-# Get the download URL of the latest release, filtering for .deb files that contain "amd64"
-DOWNLOAD_URL=$(curl -s $REPO_URL | jq -r '.assets[] | select(.name | endswith(".deb") and contains("amd64")) | .browser_download_url')
-# Check if the URL is empty
-if [ -z "$DOWNLOAD_URL" ]; then
-    echo "Could not find an amd64 .deb file in the latest release."
-    exit 1
-fi
-# Download the .deb file
-curl -L -o $TEMP_DEB "$DOWNLOAD_URL"
-# Install the package
-sudo dpkg -i $TEMP_DEB
-# Fix missing dependencies if any
-sudo apt-get install -f
-# Remove the temporary file
-rm $TEMP_DEB
-```
-#### Removing unnecessary packages
-```Terminal
-sudo apt autoremove -y
-```
-### Installing configs and extensions
-In addition to the applications themselves, you need to install wallpapers, configs of these applications, settings and extensions with their configs.
-#### Adding images **([add-images.sh](scripts/system/add-images.sh))**
-```Terminal
-sudo rm ~/.face
-sudo rm ~/.face.icon
+### Stage 2: Fixes
+- Huawei sound: [scripts/fixes/huawei-sound/install.sh](scripts/fixes/huawei-sound/install.sh)
+- Huawei fn keys: [scripts/fixes/fnkeys/install.sh](scripts/fixes/fnkeys/install.sh)
+- X11 fractional scaling: [scripts/fixes/x11-fractional-scaling/install.sh](scripts/fixes/x11-fractional-scaling/install.sh)
 
-cp ../../home/background2K.png ~/.background2K.png
-cp ../../home/gdm_background2K.png ~/.gdm_background2K.png
-```
-#### Adding configs **([apply-configs.sh](scripts/system/apply-configs.sh))**
-```Terminal
-sudo rm -r ~/.config
-cp -r ../../config ~/.config 
-```
-#### Adding extensions **([apply-extensions.sh](scripts/system/apply-extensions.sh))**
-```Terminal
-mkdir ~/.local/share/gnome-shell/extensions
-cp -r ../../extensions/backup/* ~/.local/share/gnome-shell/extensions/
-dconf load /org/gnome/shell/extensions/ < ../../extensions/settings_backup.txt
-```
-To enable them, run the following commands after restarting **([enable-extensions.sh](scripts/system/enable-extensions.sh))**:
-```
-gnome-extensions enable just-perfection-desktop@just-perfection
-gnome-extensions enable mediacontrols@cliffniff.github.com
-gnome-extensions enable logomenu@aryan_k
-gnome-extensions enable tiling-assistant@leleat-on-github
-gnome-extensions enable quicksettings-audio-devices-hider@marcinjahn.com
-gnome-extensions enable Vitals@CoreCoding.com
-gnome-extensions enable quick-settings-avatar@d-go
-gnome-extensions enable top-bar-organizer@julian.gse.jsts.xyz
-gnome-extensions enable quick-settings-tweaks@qwreey
-gnome-extensions enable Bluetooth-Battery-Meter@maniacx.github.com
-gnome-extensions enable blur-my-shell@aunetx
-gnome-extensions enable trayIconsReloaded@selfmade.pl
-gnome-extensions enable block-caribou-36@lxylxy123456.ercli.dev
-gnome-extensions enable user-theme@gnome-shell-extensions.gcampax.github.com
-```
-#### Updating ssh config **([update-ssh-config.sh](scripts/system/update-ssh-config.sh))**:
-```
-mkdir $HOME/.ssh
-SSH_CONFIG_FILE="$HOME/.ssh/config"
+### Stage 3: System
+- Images: [scripts/system/add-images.sh](scripts/system/add-images.sh)
+- Configs: [scripts/system/apply-configs.sh](scripts/system/apply-configs.sh)
+- Settings: [scripts/system/apply-settings.sh](scripts/system/apply-settings.sh)
+- Extensions: [scripts/system/apply-extensions.sh](scripts/system/apply-extensions.sh)
+- Enable extensions: [scripts/system/enable-extensions.sh](scripts/system/enable-extensions.sh)
+- SSH config: [scripts/system/update-ssh-config.sh](scripts/system/update-ssh-config.sh)
+- Plymouth: [scripts/system/grub/apply.sh](scripts/system/grub/apply.sh)
+- Themes: [scripts/system/apply-themes.sh](scripts/system/apply-themes.sh)
 
-if [ ! -f "$SSH_CONFIG_FILE" ]; then
-    touch "$SSH_CONFIG_FILE"
-fi
+## Apps (Highlights)
+### Required
+- Tilix, Zsh, Starship, FiraCode Nerd Font
+- Flameshot, Kooha, btop
+- GNOME extensions manager, dconf tools
+- MPV, OpenVPN, Neofetch
 
-echo -e "\n# HostKeyAlgorithms for all hosts" >> "$SSH_CONFIG_FILE"
-echo -e "\nHost *\n    HostKeyAlgorithms +ssh-rsa" >> "$SSH_CONFIG_FILE"
-```
-### Setting themes
-To make the system look beautiful, I use [theme for the appearance](https://github.com/vinceliuice/Orchis-theme) of the desktop and a [theme for loading grub](https://github.com/adi1090x/plymouth-themes), disabling all logs and dialog boxes.
-#### Orchis theme (desktop)
-```Terminal
-git clone https://github.com/vinceliuice/Orchis-theme
-cd Orchis-theme
-bash install.sh --theme green --color dark --size standard
-gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Green-Dark'
-gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Green-Dark'
-cd ..
-sudo rm -r Orchis-theme
+### Optional
+- Discord, Obsidian, IntelliJ IDEA Ultimate
+- Telegram or Ayugram
+- Docker, Yandex Music
+- VS Code + extensions
+- Arduino, RedVPN, Tailscale
+- qBittorrent, Czkawka, PDF Arranger
 
-sudo apt install -y libglib2.0-dev dconf-cli
-git clone --depth=1 https://github.com/realmazharhussain/gdm-tools
-cd gdm-tools
-sudo bash install.sh
-set-gdm-theme backup update
-set-gdm-theme set -b ~/.gdm_background2K.png
-cd ..
-sudo rm -r gdm-tools
-```
-#### Plymouth theme (grub)
-```Terminal
-sudo rm /etc/default/grub
-sudo cp grub /etc/default/
-sudo update-grub
+## Extensions
+### Sources
+- [extensions/backup](extensions/backup)
+- [extensions/settings_backup.txt](extensions/settings_backup.txt)
 
-# make sure you have the packages for plymouth
-sudo apt install -y plymouth
+### Scripts
+- [scripts/system/apply-extensions.sh](scripts/system/apply-extensions.sh)
+- [scripts/system/enable-extensions.sh](scripts/system/enable-extensions.sh)
 
-# after downloading or cloning themes, copy the selected theme in plymouth theme dir
-sudo rm -r /usr/share/plymouth/themes/cubes
-sudo cp -r ../../../grub-plymouth /usr/share/plymouth/themes/cubes
+### Enabled extensions
+- Vitals@CoreCoding.com
+- block-caribou-36@lxylxy123456.ercli.dev
+- blur-my-shell@aunetx
+- clipboard-indicator@tudmotu.com
+- custom-command-toggle@storageb.github.com
+- gsconnect@andyholmes.github.io
+- just-perfection-desktop@just-perfection
+- mediacontrols@cliffniff.github.com
+- pip-on-top@rafostar.github.com
+- quick-settings-tweaks@qwreey
+- quicksettings-audio-devices-hider@marcinjahn.com
+- tiling-assistant@leleat-on-github
+- top-bar-organizer@julian.gse.jsts.xyz
+- trayIconsReloaded@selfmade.pl
+- user-theme@gnome-shell-extensions.gcampax.github.com
 
-# install the new theme (angular, in this case)
-sudo update-alternatives -telegram-desktop-install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/cubes/cubes.plymouth 100
+## Notes
+- **Placeholders:** `__USER__`, `__HOST__` are replaced during apply.
+- **Reboot:** required after fixes and theme changes.
+- **Optional apps:** Ayugram/Telegram, Docker, Yandex Music, VS Code extensions, RedVPN, Tailscale.
 
-# select the theme to apply
-sudo plymouth-set-default-theme cubes
-# update initramfs 
-sudo update-initramfs -u
-```
-## Extra Steps
-- Be careful with the automatic installation. The scripts are not perfect and maybe some will not work for you, as they may only fit my system or account. I advise you to figure out each step of the installation yourself
-- After any of the installations, do not forget to change the graphics platform from wayland to Xorg, otherwise at least the gnome pie menu will not work: ![switch wayland to x11 tutorial](assets/switch-wayland-to-x11.gif)
-- I noticed that some applications cannot save the result if the window is closed not through the X (cross) button, but simply by closing (for example, when old keys are rebinded. To return the window close button, enter the command: `gsettings set org.gnome.desktop.wm.preferences button-layout :close`
-# Keybinds
-Keybinds were made based on the names of applications or associations with them. To launch the rest of the applications, `gnome pie` or search is used (clicking on win and entering the name).
-- **`Super + Enter`** Launch terminal
-- **`Alt + A`** Launch Gnome Pie
-- **`Super + Q`** Close window
-- **`Super + W`** Launch Firefox
-- **`Super + E`** Launch Nautilus
-- **`Super + T`** Launch Ayugram
-- **`Super + Y`** Launch Yandex music
-- **`Super + O`** Launch Obsidian
-- **`Super + P`** Change the monitor mode
-- **`Super + A`** Minimize the window
-- **`Super + S`** Launch Settings
-- **`Super + D`** Launch Discord
-- **`Super + K`** Log Out
-- **`Super + L`** Lockscreen
-- **`Super + ;`** Power off
-- **`Super + C`** Launch Calculator
-- **`Super + B`** Launch btop++
-- **`Super + Tab`** Change the window in the current workspace
-- **`Super + {number}`** Switch to the `{number}` workspace
-- **`Super + Shift + {number}`** Move the window to the `{number}` workspace
-- **`Alt + Tab`** Change the window on all workspaces
-- **`PrtSc`** Take screenshot using flameshot
-- **`Shift + PrtSc`** Open flameshot settings
-- **`Super + LMB`** Move window
-- **`Super + MMB`** Resize window
+## Keybinds (Custom)
+Defined in: [scripts/system/keybinds/keys/custom.txt](scripts/system/keybinds/keys/custom.txt)
+- **Super+Return:** Tilix
+- **Super+W:** Firefox
+- **Super+E:** Nautilus
+- **Super+T:** Telegram (or Ayugram if installed)
+- **Super+Y:** Yandex Music
+- **Super+O:** Obsidian
+- **Super+V:** VS Code
+- **Super+B:** btop (Tilix full screen)
+- **Super+C:** Calculator
+- **Super+D:** Discord
+- **Super+S:** Settings
+- **Super+K:** Log out
+- **Print:** Flameshot GUI
+- **Shift+Print:** Flameshot config
+- **Ctrl+Print:** Kooha
+
 ## Credits
-Some material was taken from other repositories and has been slightly modified:
-- [Debian bspwm dotfiles](https://github.com/addy-dclxvi/debian-bspwm-dotfiles) | **Author:** [addy-dclxvi](https://github.com/addy-dclxvi) | **Taken:** background image, `kitty` config, `fish` config, some keybinds
-- [Orchis theme](https://github.com/vinceliuice/Orchis-theme) | **Author:** [vinceliuice](https://github.com/vinceliuice) | **Taken:** green dark theme
-- [Huawei ubuntu sound fix](https://github.com/Smoren/huawei-ubuntu-sound-fix) | **Author:** [Smoren](https://github.com/Smoren) | **Info:** for huawei 14s / 16s users (also work with Debian)
-- [plymouth themes](https://github.com/adi1090x/plymouth-themes) | **Author:** [adi1090x](https://github.com/adi1090x) | **Taken:** used `cubes` theme from pack 1
+- Huawei sound fix: https://github.com/Smoren/huawei-ubuntu-sound-fix
+- X11 fractional scaling: https://github.com/KroJIak/debian-gnome-x11-fractional-scaling.git
+- Huawei fnkeys: https://github.com/KroJIak/huawei-fnkeys-debian-fix.git
+- RedVPN client manager: https://github.com/KroJIak/redvpn-client-manager.git
+- Plymouth themes: https://github.com/adi1090x/plymouth-themes
