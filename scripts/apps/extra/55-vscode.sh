@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../../lib/common.sh
 source "$SCRIPT_DIR/../../lib/common.sh"
 
-sudo snap install code --classic
+run_cmd "install VSCode" sudo snap install code --classic
 
 code_cmd=""
 if command -v code >/dev/null 2>&1; then

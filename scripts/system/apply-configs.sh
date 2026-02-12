@@ -5,6 +5,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../lib/common.sh
 source "$SCRIPT_DIR/../lib/common.sh"
 
+if [ ! -d "$REPO_ROOT/config" ]; then
+	warn "config directory not found, skipping config installation"
+	exit 0
+fi
+
 mkdir -p "$HOME/.config"
 
 current_user="$(id -un)"
@@ -27,8 +32,14 @@ shopt -s nullglob
 for src in "$REPO_ROOT/config"/*; do
 	name="$(basename "$src")"
 	dest="$HOME/.config/$name"
+	backup="$HOME/.config/${name}.bak"
+	
 	if [ -e "$dest" ]; then
-		mv "$dest" "$HOME/.config/${name}.bak"
+		# Remove old backup if it exists
+		if [ -e "$backup" ]; then
+			rm -rf "$backup"
+		fi
+		mv "$dest" "$backup"
 	fi
 	cp -r "$src" "$dest"
 	replace_placeholders "$dest"

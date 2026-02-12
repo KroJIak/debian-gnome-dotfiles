@@ -24,6 +24,13 @@ for arg in "$@"; do
 	esac
 done
 
+# Set APT_YES_FLAG based on AUTO_YES
+if [[ "$AUTO_YES" -eq 1 ]]; then
+	APT_YES_FLAG="-y"
+else
+	APT_YES_FLAG=""
+fi
+
 if command -v tput >/dev/null 2>&1; then
 	COLOR_OK=$(tput setaf 2)
 	COLOR_WARN=$(tput setaf 3)
@@ -98,8 +105,8 @@ SERVICE_UNIT="$SCRIPT_DIR/huawei-soundcard-headphones-monitor.service"
 info "Installing Huawei sound fix"
 
 if prompt_confirm "Install required packages (alsa-tools, alsa-utils)?"; then
-	run_cmd "apt update" sudo apt update -y
-	run_cmd "install packages" sudo apt install -y alsa-tools alsa-utils
+	run_cmd "apt update" sudo apt update
+	run_cmd "install packages" sudo apt install $APT_YES_FLAG alsa-tools alsa-utils
 else
 	warn "Skipping package installation"
 fi

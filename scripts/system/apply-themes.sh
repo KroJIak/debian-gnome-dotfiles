@@ -4,14 +4,29 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../lib/common.sh
 source "$SCRIPT_DIR/../lib/common.sh"
-THEMES_DIR="$SCRIPT_DIR/../../gtk-theme"
+THEMES_DIR="$REPO_ROOT/gtk-theme"
+
+if [ ! -d "$THEMES_DIR" ]; then
+	warn "gtk-theme directory not found, skipping theme installation"
+	exit 0
+fi
 
 mkdir -p "$HOME/.themes"
-cp -r "$THEMES_DIR/Everforest-Dark-Medium-B-GS" "$HOME/.themes/"
-cp -r "$THEMES_DIR/Everforest-Green-Dark" "$HOME/.themes/"
 
-gsettings set org.gnome.desktop.interface gtk-theme 'Everforest-Green-Dark'
-gsettings set org.gnome.shell.extensions.user-theme name 'Everforest-Dark-Medium-B-GS'
+if [ -d "$THEMES_DIR/Everforest-Dark-Medium-B-GS" ]; then
+	cp -r "$THEMES_DIR/Everforest-Dark-Medium-B-GS" "$HOME/.themes/"
+else
+	warn "Everforest-Dark-Medium-B-GS theme not found"
+fi
+
+if [ -d "$THEMES_DIR/Everforest-Green-Dark" ]; then
+	cp -r "$THEMES_DIR/Everforest-Green-Dark" "$HOME/.themes/"
+else
+	warn "Everforest-Green-Dark theme not found"
+fi
+
+gsettings set org.gnome.desktop.interface gtk-theme 'Everforest-Green-Dark' 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
+gsettings set org.gnome.shell.extensions.user-theme name 'Everforest-Dark-Medium-B-GS' 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
 
 if command -v gnome-extensions >/dev/null 2>&1; then
 	if gnome-extensions info user-theme@gnome-shell-extensions.gcampax.github.com >/dev/null 2>&1; then

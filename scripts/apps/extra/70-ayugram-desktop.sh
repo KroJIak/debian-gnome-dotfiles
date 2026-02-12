@@ -33,6 +33,10 @@ trap 'rm -rf "$tmp_dir"' EXIT
 file="$tmp_dir/$(basename "$url")"
 
 info "Downloading: $url"
-curl -fL --retry 3 --retry-delay 1 -o "$file" "$url"
+if [[ "${DOTFILES_DEBUG:-0}" -eq 1 ]]; then
+  curl -fL --retry 3 --retry-delay 1 -o "$file" "$url"
+else
+  curl -sfL --retry 3 --retry-delay 1 -o "$file" "$url"
+fi
 ok "Done."
 info "Saved to: $file"

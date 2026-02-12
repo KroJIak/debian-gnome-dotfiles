@@ -10,7 +10,7 @@ if ! grep -q "tailscale" "$REPO_ROOT/extensions/settings_backup.txt"; then
 	warn "tailscale commands are missing from extensions/settings_backup.txt."
 fi
 
-curl -fsSL https://tailscale.com/install.sh | sh
+run_cmd "install tailscale" bash -c 'curl -fsSL https://tailscale.com/install.sh | sh'
 
 sudo systemctl enable --now tailscaled
 

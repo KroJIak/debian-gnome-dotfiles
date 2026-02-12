@@ -8,6 +8,13 @@ DOTFILES_DEBUG="${DOTFILES_DEBUG:-0}"
 DOTFILES_AUTO_YES="${DOTFILES_AUTO_YES:-0}"
 DOTFILES_LOG_DIR="${DOTFILES_LOG_DIR:-$HOME/.cache/debian-dotfiles/logs}"
 
+# Set APT_YES_FLAG based on DOTFILES_AUTO_YES
+if [[ "$DOTFILES_AUTO_YES" -eq 1 ]]; then
+  APT_YES_FLAG="-y"
+else
+  APT_YES_FLAG=""
+fi
+
 if command -v tput >/dev/null 2>&1; then
   COLOR_OK=$(tput setaf 2)
   COLOR_WARN=$(tput setaf 3)
@@ -65,7 +72,7 @@ run_cmd() {
   else
     local log_file
     log_file="$DOTFILES_LOG_DIR/$(date +%Y%m%d-%H%M%S)-${label// /_}.log"
-    info "$label (log: $log_file)"
+    info "$label"
     if ! "$@" >"$log_file" 2>&1; then
       warn "$label failed; see $log_file"
       tail -n 40 "$log_file" >&2 || true

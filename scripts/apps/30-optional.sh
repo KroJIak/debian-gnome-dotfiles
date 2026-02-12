@@ -5,13 +5,14 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=../lib/common.sh
 source "$SCRIPT_DIR/../lib/common.sh"
 
-sudo apt update -y && sudo apt upgrade -y
-sudo apt install -y qbittorrent
-sudo apt install -y czkawka
-sudo apt install -y pdfarranger
-sudo snap install intellij-idea-ultimate --classic
-sudo snap install obsidian --classic
-sudo snap install discord
+run_cmd "apt update" sudo apt update -qq
+run_cmd "apt upgrade" sudo apt upgrade $APT_YES_FLAG -qq
+run_cmd "install qbittorrent" sudo apt install $APT_YES_FLAG -qq qbittorrent
+run_cmd "install czkawka" sudo snap install czkawka
+run_cmd "install pdfarranger" sudo apt install $APT_YES_FLAG -qq pdfarranger
+run_cmd "install IntelliJ IDEA Ultimate" sudo snap install intellij-idea-ultimate --classic
+run_cmd "install Obsidian" sudo snap install obsidian --classic
+run_cmd "install Discord" sudo snap install discord
 
 if [[ "${DOTFILES_AUTO_YES:-0}" -eq 1 ]]; then
 	reply="y"
@@ -21,7 +22,7 @@ fi
 if [[ "$reply" =~ ^[Yy]$ ]]; then
 	bash "$SCRIPT_DIR/extra/70-ayugram-desktop.sh"
 else
-	sudo snap install telegram-desktop
+	run_cmd "install Telegram Desktop" sudo snap install telegram-desktop
 fi
 
 bash "$SCRIPT_DIR/extra/40-docker.sh"

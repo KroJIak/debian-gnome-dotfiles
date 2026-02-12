@@ -8,8 +8,8 @@ source "$SCRIPT_DIR/../../lib/common.sh"
 REPO_URL="https://api.github.com/repos/Ulauncher/Ulauncher/releases/latest"
 TEMP_DIR="/tmp"
 
-run_cmd "apt update" sudo apt update -y
-run_cmd "install deps" sudo apt install -y curl wget
+run_cmd "apt update" sudo apt update
+run_cmd "install deps" sudo apt install $APT_YES_FLAG curl wget
 
 info "Fetching latest Ulauncher release"
 latest_release="$(curl -fsSL "$REPO_URL")"
@@ -28,6 +28,6 @@ info "Downloading: $filename"
 run_cmd "download ulauncher" wget -O "$TEMP_DIR/$filename" "$deb_url"
 
 info "Installing Ulauncher"
-run_cmd "install ulauncher" sudo apt install -y "$TEMP_DIR/$filename"
+run_cmd "install ulauncher" sudo apt install $APT_YES_FLAG "$TEMP_DIR/$filename"
 
 ok "Ulauncher $version installed"

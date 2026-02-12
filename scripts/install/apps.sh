@@ -21,5 +21,5 @@ else
 	bash "$REPO_ROOT/scripts/apps/30-optional.sh"
 fi
 log "[Stage 1] Applications | Autoremove"
-sudo apt autoremove -y
+run_cmd "apt autoremove" sudo apt autoremove $APT_YES_FLAG -qq
 log "[Stage 1] Applications | Done"

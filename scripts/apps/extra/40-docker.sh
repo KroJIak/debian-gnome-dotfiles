@@ -6,8 +6,8 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$SCRIPT_DIR/../../lib/common.sh"
 
 # Add Docker's official GPG key:
-sudo apt update -y
-sudo apt install -y ca-certificates curl
+run_cmd "apt update" sudo apt update -qq
+run_cmd "install ca-certificates curl" sudo apt install $APT_YES_FLAG -qq ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
@@ -17,9 +17,9 @@ echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt update -y
+run_cmd "apt update" sudo apt update -qq
 
-sudo apt install -y \
+run_cmd "install docker" sudo apt install $APT_YES_FLAG -qq \
   docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 if prompt_confirm "Configure Docker registry mirrors?"; then

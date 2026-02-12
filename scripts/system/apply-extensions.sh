@@ -10,6 +10,16 @@ host_name="$(hostname)"
 tmp_dir="$(mktemp -d)"
 trap 'rm -rf "$tmp_dir"' EXIT
 
+if [ ! -d "$REPO_ROOT/extensions/backup" ]; then
+	warn "extensions/backup directory not found, skipping extensions installation"
+	exit 0
+fi
+
+if [ ! -f "$REPO_ROOT/extensions/settings_backup.txt" ]; then
+	warn "extensions/settings_backup.txt not found, skipping extensions installation"
+	exit 0
+fi
+
 mkdir -p "$tmp_dir/extensions"
 cp -r "$REPO_ROOT/extensions/backup/." "$tmp_dir/extensions/"
 cp "$REPO_ROOT/extensions/settings_backup.txt" "$tmp_dir/settings_backup.txt"

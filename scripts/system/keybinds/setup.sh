@@ -15,7 +15,7 @@ trim() {
 
 read_gsettings_array() {
   local raw
-  raw="$(gsettings get "$CUSTOM_SCHEMA" custom-keybindings)"
+  raw="$(gsettings get "$CUSTOM_SCHEMA" custom-keybindings 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls")"
   if [[ "$raw" == "@as []" ]]; then
     printf '%s' ""
     return 0
@@ -54,7 +54,7 @@ write_gsettings_array() {
     out+="'${item}'"
   done
   out+="]"
-  gsettings set "$CUSTOM_SCHEMA" custom-keybindings "$out"
+  gsettings set "$CUSTOM_SCHEMA" custom-keybindings "$out" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
 }
 
 add_unique() {
@@ -106,9 +106,9 @@ apply_custom() {
     fi
 
     local path="${CUSTOM_BASE}${index}/"
-    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" name "$name"
-    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" command "$command"
-    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" binding "$bind"
+    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" name "$name" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
+    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" command "$command" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
+    gsettings set "${CUSTOM_SCHEMA}.custom-keybinding:${path}" binding "$bind" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" || true
 
     IFS=' ' read -r -a current <<< "$(add_unique "$path" "${current[@]}")"
     index=$((index + 1))
@@ -129,9 +129,9 @@ apply_defaults() {
     name="$(printf '%s\n' "$line" | awk -F'"' '{print $2}')"
     bind="$(printf '%s\n' "$line" | awk -F'"' '{print $4}')"
     if [ -n "$bind" ]; then
-      gsettings set "$schema" "$name" "['$bind']"
+      gsettings set "$schema" "$name" "['$bind']" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" | grep -v "No such key" || true
     else
-      gsettings set "$schema" "$name" "[]"
+      gsettings set "$schema" "$name" "[]" 2>&1 | grep -v "Failed to load module" | grep -v "libgnutls" | grep -v "No such key" || true
     fi
   done < "$file"
 }
