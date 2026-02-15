@@ -32,6 +32,15 @@ else
   warn "Background image not found at $HOME/.background2K.png"
 fi
 
+
+# region/locale
+if prompt_confirm "Set Russian date and number format? (This will not change system language) (y/N)"; then
+  gs set org.gnome.system.locale region 'ru_RU.UTF-8'
+  ok "Russian region format applied."
+else
+  log "Region format unchanged."
+fi
+
 # multitasking
 gs set org.gnome.desktop.interface enable-hot-corners false
 gs set org.gnome.mutter edge-tiling false
