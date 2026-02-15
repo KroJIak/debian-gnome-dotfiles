@@ -38,5 +38,14 @@ if [[ "${DOTFILES_DEBUG:-0}" -eq 1 ]]; then
 else
   curl -sfL --retry 3 --retry-delay 1 -o "$file" "$url"
 fi
+
 ok "Done."
 info "Saved to: $file"
+
+# Установка flatpak-файла
+need flatpak
+info "Installing Ayugram Desktop via flatpak..."
+if ! flatpak install -y --user "$file"; then
+  warn "Ayugram Desktop installation failed."
+  exit 3
+fi

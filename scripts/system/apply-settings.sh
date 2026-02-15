@@ -61,6 +61,8 @@ echo "MOZ_USE_XINPUT2 DEFAULT=1" | sudo tee -a /etc/security/pam_env.conf
 
 # max volume
 gs set org.gnome.desktop.sound allow-volume-above-100-percent true
+# disable event sounds
+gs set org.gnome.desktop.sound event-sounds false
 
 # middle click paste
 gs set org.gnome.desktop.interface gtk-enable-primary-paste false
