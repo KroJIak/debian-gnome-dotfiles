@@ -32,10 +32,19 @@ if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 fi
 
+
 if [ -f "$ZSH_DIR/.zshrc" ]; then
 	cp "$ZSH_DIR/.zshrc" "$HOME/.zshrc"
 else
 	warn ".zshrc not found in $ZSH_DIR"
+fi
+
+# Сделать zsh shell по умолчанию для пользователя
+if command -v zsh >/dev/null 2>&1; then
+	if [ "$SHELL" != "$(command -v zsh)" ]; then
+		echo "Changing default shell to zsh for user $USER..."
+		chsh -s "$(command -v zsh)" "$USER"
+	fi
 fi
 
 if ! fc-list | grep -qi "FiraCode Nerd Font"; then

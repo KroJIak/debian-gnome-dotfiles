@@ -22,8 +22,8 @@ run_cmd "apt update" sudo apt update -qq
 run_cmd "install docker" sudo apt install $APT_YES_FLAG -qq \
   docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+warn "In Russia after 2024, Docker Hub may be unavailable for pulls."
 if prompt_confirm "Configure Docker registry mirrors?"; then
-  warn "In Russia after 2024, Docker Hub may be unavailable for pulls."
   sudo mkdir -p /etc/docker
   sudo tee /etc/docker/daemon.json >/dev/null <<'JSON'
 {

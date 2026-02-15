@@ -7,51 +7,14 @@ source "$SCRIPT_DIR/../../lib/common.sh"
 
 run_cmd "install VSCode" sudo snap install code --classic
 
-code_cmd=""
-if command -v code >/dev/null 2>&1; then
-	code_cmd="code"
-elif [ -x "/snap/bin/code" ]; then
-	code_cmd="/snap/bin/code"
-else
-	warn "VS Code CLI not found after install."
-	exit 1
-fi
-
 extensions=(
-	ckolkman.vscode-postgres
-	esbenp.prettier-vscode
-	github.copilot-chat
-	golang.go
-	johnny-zhao.oai-compatible-copilot
-	mikestead.dotenv
-	ms-azuretools.vscode-containers
-	ms-azuretools.vscode-docker
-	ms-python.debugpy
-	ms-python.python
-	ms-python.vscode-pylance
-	ms-python.vscode-python-envs
-	ms-toolsai.jupyter
-	ms-toolsai.jupyter-keymap
-	ms-toolsai.jupyter-renderers
-	ms-toolsai.vscode-jupyter-cell-tags
-	ms-toolsai.vscode-jupyter-slideshow
-	ms-vscode-remote.remote-containers
-	ms-vscode-remote.remote-ssh
-	ms-vscode-remote.remote-ssh-edit
-	ms-vscode.cmake-tools
-	ms-vscode.cpptools
-	ms-vscode.cpptools-extension-pack
-	ms-vscode.cpptools-themes
-	ms-vscode.remote-explorer
-	naumovs.color-highlight
-	qwtel.sqlite-viewer
-	redhat.vscode-yaml
-	repreng.csv
-	ritwickdey.liveserver
-	tomoki1207.pdf
-	usernamehw.errorlens
-)
 
-for ext in "${extensions[@]}"; do
-	"$code_cmd" --install-extension "$ext"
-done
+
+warn "VSCode extension installation is blocked in Russia. Network access may fail."
+if prompt_confirm "Do you want to try installing VSCode extensions now? (y/N)"; then
+  if ! timeout 300 bash "$SCRIPT_DIR/56-vscode-extensions.sh"; then
+    warn "VSCode extension installation timed out. Skipping."
+  fi
+else
+  log "You can later install extensions with: bash scripts/apps/extra/56-vscode-extensions.sh"
+fi
