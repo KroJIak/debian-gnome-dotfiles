@@ -16,6 +16,8 @@ gs set org.gnome.shell favorite-apps "[]"
 # keybinds
 bash "$SCRIPT_DIR/keybinds/setup.sh"
 
+gsettings set org.gnome.desktop.input-sources xkb-options "['grp:alt_shift_toggle']"
+
 # home folders
 bash "$SCRIPT_DIR/home-folders/apply.sh"
 

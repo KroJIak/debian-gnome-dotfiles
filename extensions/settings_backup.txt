@@ -10,9 +10,10 @@ sigma=30
 blur=true
 brightness=1.0
 dynamic-opacity=false
-enable-all=true
+enable-all=false
 opacity=255
 sigma=4
+whitelist=['Ulauncher', 'Ulauncher', 'Ulauncher', 'Tilix']
 
 [blur-my-shell/coverflow-alt-tab]
 pipeline='pipeline_default'
