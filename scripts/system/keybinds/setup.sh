@@ -74,12 +74,12 @@ add_unique() {
 
 resolve_telegram_command() {
   local fallback="$1"
-  if command -v telegram-desktop >/dev/null 2>&1; then
-    printf '%s' "telegram-desktop"
+  if flatpak info com.ayugram.desktop >/dev/null 2>&1; then
+    printf '%s' "flatpak run com.ayugram.desktop"
     return 0
   fi
-  if command -v ayugram-desktop >/dev/null 2>&1; then
-    printf '%s' "ayugram-desktop"
+  if command -v telegram-desktop >/dev/null 2>&1; then
+    printf '%s' "telegram-desktop"
     return 0
   fi
   printf '%s' "$fallback"

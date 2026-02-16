@@ -12,15 +12,18 @@ if [ ! -d "$THEMES_DIR" ]; then
 fi
 
 mkdir -p "$HOME/.themes"
+mkdir -p "$HOME/.local/share/themes"
 
 if [ -d "$THEMES_DIR/Everforest-Dark-Medium-B-GS" ]; then
 	cp -r "$THEMES_DIR/Everforest-Dark-Medium-B-GS" "$HOME/.themes/"
+	cp -r "$THEMES_DIR/Everforest-Dark-Medium-B-GS" "$HOME/.local/share/themes/"
 else
 	warn "Everforest-Dark-Medium-B-GS theme not found"
 fi
 
 if [ -d "$THEMES_DIR/Everforest-Green-Dark" ]; then
 	cp -r "$THEMES_DIR/Everforest-Green-Dark" "$HOME/.themes/"
+	cp -r "$THEMES_DIR/Everforest-Green-Dark" "$HOME/.local/share/themes/"
 else
 	warn "Everforest-Green-Dark theme not found"
 fi
