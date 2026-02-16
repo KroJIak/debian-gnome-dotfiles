@@ -7,8 +7,6 @@ source "$SCRIPT_DIR/../../lib/common.sh"
 
 run_cmd "install VSCode" sudo snap install code --classic
 
-extensions=(
-
 
 warn "VSCode extension installation is blocked in Russia. Network access may fail."
 if prompt_confirm "Do you want to try installing VSCode extensions now? (y/N)"; then

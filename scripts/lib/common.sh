@@ -54,6 +54,8 @@ fail() {
 
 prompt_confirm() {
   local message="$1"
+  # Удаляем любые скобки и мусор из message
+  message="$(echo "$message" | sed 's/([^)]+)//g' | sed 's/\[[^]]*\]//g')"
   if [[ "$DOTFILES_AUTO_YES" -eq 1 ]]; then
     echo "${COLOR_DIM}[auto-yes]${COLOR_RESET} $message"
     return 0
