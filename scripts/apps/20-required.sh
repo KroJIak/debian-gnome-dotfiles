@@ -16,6 +16,7 @@ run_cmd "install required packages" sudo apt install $APT_YES_FLAG -qq \
 run_cmd "install Kooha" sudo flatpak install $APT_YES_FLAG flathub io.github.seadve.Kooha
 
 bash "$SCRIPT_DIR/extra/60-flameshot.sh"
+bash "$SCRIPT_DIR/extra/70-neofetch.sh"
 bash "$SCRIPT_DIR/extra/65-ipscan.sh"
 bash "$SCRIPT_DIR/extra/85-ulauncher.sh"
 bash "$SCRIPT_DIR/extra/zsh/install.sh"
